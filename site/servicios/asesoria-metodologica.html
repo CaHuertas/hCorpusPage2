@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asesoría metodológica y diseño de estudios — hCorpus</title>
+<meta name="description" content="Diseño de estudio y protocolo, plan de análisis estadístico, cálculo de tamaño de muestra y apoyo a convocatorias.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon_32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon/favicon_64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon_180.png">
+
+<meta property="og:title" content="Asesoría metodológica y diseño de estudios — hCorpus">
+<meta property="og:description" content="Diseño de estudio y protocolo, plan de análisis estadístico, cálculo de tamaño de muestra y apoyo a convocatorias.">
+<meta property="og:image" content="../assets/img/og-image.png">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="hCorpus — inicio">
+      <img src="../assets/img/logo-horizontal_transparente.png" alt="hCorpus">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li class="has-dropdown">
+          <button type="button" class="nav-dropdown-toggle is-current" aria-expanded="false" aria-haspopup="true" aria-controls="servicesMenu">
+            Servicios
+            <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" id="servicesMenu">
+            <a href="asesoria-metodologica.html" aria-current="page">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Asesoría metodológica</strong><small>Protocolo, SAP y tamaño de muestra</small></span>
+            </a>
+            <a href="bioestadistica-epidemiologia.html">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Bioestadística y epidemiología</strong><small>Regresión, supervivencia, inferencia causal</small></span>
+            </a>
+            <a href="curaduria-datos.html">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Curaduría y análisis de datos</strong><small>Limpieza, EDA y reproducibilidad</small></span>
+            </a>
+            <a href="formacion-aplicada.html">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 5-10 5L2 8l10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Formación aplicada</strong><small>Cursos de R, Python y bioinformática</small></span>
+            </a>
+            <a href="genomica-transcriptomica.html">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/><path d="M9.5 6.5h5M8.7 9.5h6.6M8.7 14.5h6.6M9.5 17.5h5"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Genómica y transcriptómica</strong><small>RNA-seq, exomas y ancestría</small></span>
+            </a>
+            <a class="nav-dropdown-all" href="index.html">
+              Ver todos los servicios
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </li>
+        <li><a href="../metodologia.html">Metodología</a></li>
+        <li><a href="../index.html#nosotros">Nosotros</a></li>
+        <li><a href="../index.html#sectores">Sectores</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="../index.html#contacto">Revisión inicial gratis</a>
+      <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Abrir menú de navegación">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+  <ul>
+    <li class="mobile-has-children">
+      <div class="mobile-nav-row">
+        <a href="index.html">Servicios</a>
+        <button type="button" class="mobile-subnav-toggle" aria-expanded="false" aria-controls="mobileServicesSub" aria-label="Mostrar servicios">
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <ul class="mobile-subnav" id="mobileServicesSub">
+        <li><a href="asesoria-metodologica.html">Asesoría metodológica</a></li>
+        <li><a href="bioestadistica-epidemiologia.html">Bioestadística y epidemiología</a></li>
+        <li><a href="curaduria-datos.html">Curaduría y análisis de datos</a></li>
+        <li><a href="formacion-aplicada.html">Formación aplicada</a></li>
+        <li><a href="genomica-transcriptomica.html">Genómica y transcriptómica</a></li>
+      </ul>
+    </li>
+    <li><a href="../metodologia.html">Metodología</a></li>
+    <li><a href="../index.html#nosotros">Nosotros</a></li>
+    <li><a href="../index.html#sectores">Sectores</a></li>
+    <li><a href="../index.html#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn btn-primary btn-block" href="../index.html#contacto">Revisión inicial gratis</a>
+</nav>
+
+<main id="contenido">
+
+  <!-- HERO -->
+  <section class="hero-dark">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="index.html">Servicios</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">Asesoría metodológica</span>
+      </p>
+      <p class="eyebrow">Servicios · Asesoría metodológica</p>
+      <h1>Asesoría metodológica y diseño de estudios</h1>
+      <p class="lede">Si el estudio todavía no existe, lo diseñamos contigo desde el protocolo: la pregunta, el desenlace, el diseño y el plan de análisis quedan definidos antes de recolectar el primer dato.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="../index.html#contacto">Revisión inicial gratis</a>
+        <a class="btn btn-ghost-light" href="index.html">Ver todos los servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLA DE SERVICIOS -->
+  <section class="services">
+    <div class="container">
+      <div class="detail-block">
+        <h2>Servicios y plazos estimados</h2>
+        <p>El precio depende del alcance de cada proyecto; los plazos sí te los podemos dar desde ya.</p>
+        <div class="service-table-wrap">
+          <table class="service-table">
+            <thead>
+              <tr><th>Servicio</th><th>Qué recibes</th><th>Plazo estimado</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Diseño de estudio y protocolo</td>
+                <td>La pregunta y el desenlace principal definidos, la elección del diseño, los criterios de inclusión y un plan para los datos que puedan faltar.</td>
+                <td>5–15 días</td>
+              </tr>
+              <tr>
+                <td>Plan de análisis estadístico (SAP)</td>
+                <td>Un plan de análisis completo, con la justificación de cada método y el anexo listo para presentar al comité de ética.</td>
+                <td>5–15 días</td>
+              </tr>
+              <tr>
+                <td>Cálculo de tamaño de muestra</td>
+                <td>El cálculo, los supuestos utilizados, escenarios de sensibilidad y el texto redactado para incluir en el protocolo.</td>
+                <td>3–7 días</td>
+              </tr>
+              <tr>
+                <td>Apoyo a convocatorias</td>
+                <td>El componente de análisis de tu propuesta de financiamiento, con cronograma y presupuesto técnico.</td>
+                <td>5–10 días</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="detail-block">
+        <h2>Cómo lo hacemos</h2>
+        <p>Empezamos por entender la pregunta de investigación y el contexto donde se va a usar el resultado, para proponer un diseño que sea viable con los recursos y los tiempos que tienes disponibles.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS RELACIONADOS -->
+  <section class="services section-alt">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">También te puede interesar</p>
+        <h2>Servicios relacionados</h2>
+      </div>
+      <div class="services-grid">
+        <article class="service-card" data-reveal>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg>
+          </div>
+          <h3><a href="bioestadistica-epidemiologia.html">Bioestadística y epidemiología clínica</a></h3>
+          <p>Regresión, supervivencia y modelos avanzados para tu estudio ya en marcha.</p>
+          <a class="service-link" href="bioestadistica-epidemiologia.html">Saber más
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+        <article class="service-card" data-reveal>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+          </div>
+          <h3><a href="curaduria-datos.html">Curaduría y análisis de datos</a></h3>
+          <p>Limpieza y documentación de los datos una vez empiece la recolección.</p>
+          <a class="service-link" href="curaduria-datos.html">Saber más
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+        <article class="service-card" data-reveal>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/><path d="M9.5 6.5h5M8.7 9.5h6.6M8.7 14.5h6.6M9.5 17.5h5"/></svg>
+          </div>
+          <h3><a href="genomica-transcriptomica.html">Genómica, transcriptómica y modelos</a></h3>
+          <p>Diseño experimental y covariables cuando el estudio incluye datos genómicos.</p>
+          <a class="service-link" href="genomica-transcriptomica.html">Saber más
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="container cta-wrap">
+    <div class="cta-banner" data-reveal>
+      <h2>¿Tu estudio todavía está en el papel?</h2>
+      <p>Cuéntanos qué quieres responder y en qué etapa vas. Te ayudamos a llegar a un protocolo defendible.</p>
+      <a class="btn btn-on-dark" href="../index.html#contacto">Escríbenos ahora</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="../assets/img/logo-horizontal_para-fondo-oscuro.png" alt="hCorpus">
+        <p>Bioestadística, epidemiología, bioinformática y diseño de estudios para grupos de investigación, hospitales, laboratorios de genética y empresas.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/hcorpus" target="_blank" rel="noopener" aria-label="hCorpus en LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M11.5 10H12v6"/></svg>
+          </a>
+          <a href="mailto:gerencia@h-corpus.com" aria-label="Enviar correo a hCorpus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="asesoria-metodologica.html">Asesoría metodológica</a></li>
+          <li><a href="bioestadistica-epidemiologia.html">Bioestadística y epidemiología</a></li>
+          <li><a href="curaduria-datos.html">Curaduría y análisis de datos</a></li>
+          <li><a href="formacion-aplicada.html">Formación aplicada</a></li>
+          <li><a href="genomica-transcriptomica.html">Genómica y transcriptómica</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="../index.html#nosotros">Nosotros</a></li>
+          <li><a href="../metodologia.html">Metodología</a></li>
+          <li><a href="../index.html#sectores">Sectores</a></li>
+          <li><a href="../index.html#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Aviso de privacidad</a></li>
+          <li><a href="#">Términos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> hCorpus S.A.S. · NIT 902.098.516-1 · Bogotá D.C., Colombia</p>
+      <div class="footer-legal">
+        <a href="#">Aviso de privacidad</a>
+        <a href="#">Términos de uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

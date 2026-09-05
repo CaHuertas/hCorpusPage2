@@ -3,3 +3,9 @@
 .wrangler/
 node_modules/
 .claude/
+
+# Archivos de trabajo interno, no publicados en el sitio
+hCorpus_catalogo.pdf
+hCorpus_logo_modular_COMPLETO.ipynb
+hCorpus_formatos/
+Politica_Datos_Personales_hCorpus.docx

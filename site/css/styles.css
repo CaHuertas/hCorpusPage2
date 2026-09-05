@@ -1061,6 +1061,25 @@ input:focus, textarea:focus{
   color: var(--text-muted);
   margin-top: var(--space-sm);
 }
+.form-row-check{ margin-bottom: var(--space-md); }
+.checkbox-label{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.checkbox-label input[type="checkbox"]{
+  width: 17px;
+  min-height: 0;
+  height: 17px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--teal);
+}
+.checkbox-label a{ color: var(--teal-text); text-decoration: underline; }
 
 /* ============================================================
    Footer

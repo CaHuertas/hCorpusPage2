@@ -156,9 +156,16 @@
       var correo = form.correo.value.trim();
       var organizacion = form.organizacion.value.trim();
       var mensaje = form.mensaje.value.trim();
+      var autorizacion = form.autorizacion.checked;
 
       if (!nombre || !correo || !mensaje) {
         formStatus.textContent = "Por favor completa los campos obligatorios.";
+        formStatus.className = "form-status is-visible err";
+        return;
+      }
+
+      if (!autorizacion) {
+        formStatus.textContent = "Debes autorizar el tratamiento de tus datos personales para continuar.";
         formStatus.className = "form-status is-visible err";
         return;
       }

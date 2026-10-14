@@ -137,7 +137,7 @@
       <div class="hero-copy">
         <p class="eyebrow">Bioestadística · Epidemiología · Bioinformática</p>
         <h1>Usted tiene los datos. Nosotros, el método.</h1>
-        <p class="lede">En la mayoría de los proyectos el problema no son los datos, sino que nadie definió la pregunta antes de recolectarlos. Por eso empezamos ahí: convertimos tu base clínica o genómica en una respuesta defendible, documentando cada decisión metodológica de principio a fin. Si el estudio todavía no existe, lo diseñamos contigo desde el protocolo.</p>
+        <p class="lede">En la mayoría de los proyectos el problema no son los datos, sino que nadie definió la pregunta antes de recolectarlos. Por eso empezamos ahí: convertimos su base clínica o genómica en una respuesta defendible, documentando cada decisión metodológica de principio a fin. Si el estudio todavía no existe, lo diseñamos con usted desde el protocolo.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="#contacto">Revisión inicial gratis</a>
           <a class="btn btn-secondary" href="servicios/index.html">Ver servicios</a>
@@ -207,7 +207,7 @@
       <div class="section-head" data-reveal>
         <p class="eyebrow">Qué hacemos</p>
         <h2>Servicios de análisis de datos para ciencias de la salud</h2>
-        <p>Primero revisamos tu caso y después cotizamos: el valor depende del tamaño de la base, de cómo lleguen los datos y de qué tan definido esté el diseño. Los plazos sí te los podemos estimar desde ya.</p>
+        <p>Primero revisamos su caso y después cotizamos: el valor depende del tamaño de la base, de cómo lleguen los datos y de qué tan definido esté el diseño. Los plazos sí se los podemos estimar desde ya.</p>
       </div>
 
       <div class="services-grid">
@@ -258,7 +258,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 5-10 5L2 8l10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg>
           </div>
           <h3><a href="servicios/formacion-aplicada.html">Formación aplicada</a></h3>
-          <p>Cursos cortos y prácticos en R, Python y bioinformática, diseñados por cohorte para tu equipo.</p>
+          <p>Cursos cortos y prácticos en R, Python y bioinformática, diseñados por cohorte para su equipo.</p>
           <div class="service-tags">
             <span>R</span><span>Python</span><span>Bioinformática</span>
           </div>
@@ -297,12 +297,12 @@
         <div class="step" data-reveal>
           <div class="step-number">1</div>
           <h3>Revisión inicial</h3>
-          <p>Miramos tu base o tu protocolo y te contamos por escrito qué encontramos. Sin costo.</p>
+          <p>Miramos su base o su protocolo y le contamos por escrito qué encontramos. Sin costo.</p>
         </div>
         <div class="step" data-reveal>
           <div class="step-number">2</div>
           <h3>Cotización</h3>
-          <p>Te enviamos alcance, entregables, fechas y precio antes de empezar.</p>
+          <p>Le enviamos alcance, entregables, fechas y precio antes de empezar.</p>
         </div>
         <div class="step" data-reveal>
           <div class="step-number">3</div>
@@ -317,7 +317,7 @@
       </div>
 
       <p style="text-align:center; margin-top: var(--space-xl);" data-reveal>
-        <a class="btn btn-secondary" href="metodologia.html">Ver el proceso completo, qué necesitamos y cómo protegemos tus datos</a>
+        <a class="btn btn-secondary" href="metodologia.html">Ver el proceso completo, qué necesitamos y cómo protegemos sus datos</a>
       </p>
     </div>
   </section>
@@ -367,8 +367,8 @@
   <div class="container cta-wrap">
     <div class="cta-banner" data-reveal>
       <h2>Empecemos con una revisión sin costo</h2>
-      <p>Miramos tu base o tu protocolo durante una hora y te contamos por escrito qué encontramos. De ahí sale la cotización.</p>
-      <a class="btn btn-on-dark" href="#contacto">Escríbenos ahora</a>
+      <p>Miramos su base o su protocolo durante una hora y le contamos por escrito qué encontramos. De ahí sale la cotización.</p>
+      <a class="btn btn-on-dark" href="#contacto">Escríbanos ahora</a>
     </div>
   </div>
 
@@ -378,7 +378,7 @@
       <div class="contact-info" data-reveal>
         <p class="eyebrow">Contacto</p>
         <h2>Iniciemos una conversación</h2>
-        <p>Cuéntanos sobre tu base o tu protocolo. La primera revisión no tiene costo, y respondemos en un plazo de 1 a 2 días hábiles.</p>
+        <p>Cuéntenos sobre su base o su protocolo. La primera revisión no tiene costo, y respondemos en un plazo de 1 a 2 días hábiles.</p>
 
         <div class="contact-channels">
           <a class="contact-channel" href="mailto:gerencia@h-corpus.com">
@@ -396,7 +396,11 @@
         </div>
       </div>
 
-      <form class="contact-form" id="contactForm" novalidate>
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <!-- Clave de Web3Forms (pública por diseño). Mientras diga REEMPLAZAR, el formulario usa mailto: como respaldo. -->
+        <input type="hidden" name="access_key" value="REEMPLAZAR_CON_CLAVE_WEB3FORMS">
+        <input type="hidden" name="from_name" value="Sitio web hCorpus">
+        <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-row-2">
           <div class="form-row">
             <label for="nombre">Nombre <span class="req">*</span></label>
@@ -412,9 +416,9 @@
           <input type="text" id="organizacion" name="organizacion" autocomplete="organization">
         </div>
         <div class="form-row">
-          <label for="mensaje">Cuéntanos sobre tu proyecto <span class="req">*</span></label>
+          <label for="mensaje">Cuéntenos sobre su proyecto <span class="req">*</span></label>
           <textarea id="mensaje" name="mensaje" required></textarea>
-          <p class="field-hint">Incluye tipo de datos, objetivo del análisis y plazos si los tienes.</p>
+          <p class="field-hint">Incluya tipo de datos, objetivo del análisis y plazos si los tiene.</p>
         </div>
         <div class="form-row form-row-check">
           <label class="checkbox-label">
@@ -424,7 +428,7 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block">Enviar mensaje</button>
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        <p class="form-note">Al enviar este formulario se abrirá tu cliente de correo con el mensaje redactado hacia gerencia@h-corpus.com.</p>
+        <p class="form-note">Su mensaje llega directamente a gerencia@h-corpus.com. Respondemos en 1 a 2 días hábiles.</p>
       </form>
     </div>
   </section>

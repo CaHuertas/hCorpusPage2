@@ -147,8 +147,29 @@
     });
   }
 
-  // Formulario de contacto -> mailto
+  // Formulario de contacto -> Web3Forms (mailto: como respaldo mientras no haya clave)
   if (form) {
+    var submitBtn = form.querySelector("button[type=submit]");
+    var accessKey = form.access_key ? form.access_key.value : "";
+    var hasKey = accessKey && accessKey.indexOf("REEMPLAZAR") !== 0;
+
+    function setStatus(text, kind) {
+      formStatus.textContent = text;
+      formStatus.className = "form-status is-visible " + kind;
+    }
+
+    function openMailto(nombre, correo, organizacion, mensaje) {
+      var subject = encodeURIComponent("Contacto desde h-corpus.com — " + nombre);
+      var body = encodeURIComponent([
+        "Nombre: " + nombre,
+        "Correo: " + correo,
+        "Organización: " + (organizacion || "—"),
+        "",
+        mensaje
+      ].join("\n"));
+      window.location.href = "mailto:gerencia@h-corpus.com?subject=" + subject + "&body=" + body;
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -159,31 +180,57 @@
       var autorizacion = form.autorizacion.checked;
 
       if (!nombre || !correo || !mensaje) {
-        formStatus.textContent = "Por favor completa los campos obligatorios.";
-        formStatus.className = "form-status is-visible err";
+        setStatus("Por favor complete los campos obligatorios.", "err");
+        return;
+      }
+
+      if (!form.correo.checkValidity()) {
+        setStatus("Revise el correo: parece no tener un formato válido.", "err");
         return;
       }
 
       if (!autorizacion) {
-        formStatus.textContent = "Debes autorizar el tratamiento de tus datos personales para continuar.";
-        formStatus.className = "form-status is-visible err";
+        setStatus("Debe autorizar el tratamiento de sus datos personales para continuar.", "err");
         return;
       }
 
-      var subject = encodeURIComponent("Contacto desde hcorpus.co — " + nombre);
-      var bodyLines = [
-        "Nombre: " + nombre,
-        "Correo: " + correo,
-        "Organización: " + (organizacion || "—"),
-        "",
-        mensaje
-      ];
-      var body = encodeURIComponent(bodyLines.join("\n"));
+      if (!hasKey) {
+        openMailto(nombre, correo, organizacion, mensaje);
+        setStatus("Se abrió su cliente de correo con el mensaje listo para enviar.", "ok");
+        return;
+      }
 
-      window.location.href = "mailto:gerencia@h-corpus.com?subject=" + subject + "&body=" + body;
+      submitBtn.disabled = true;
+      setStatus("Enviando…", "ok");
 
-      formStatus.textContent = "Se abrió tu cliente de correo con el mensaje listo para enviar.";
-      formStatus.className = "form-status is-visible ok";
+      fetch(form.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: "Contacto desde h-corpus.com — " + nombre,
+          from_name: "Sitio web hCorpus",
+          replyto: correo,
+          botcheck: form.botcheck.checked,
+          nombre: nombre,
+          correo: correo,
+          organizacion: organizacion || "—",
+          mensaje: mensaje,
+          autorizacion_datos: "Sí, conforme a la Política de Tratamiento de Datos Personales"
+        })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (!data.success) throw new Error(data.message || "Error de envío");
+          form.reset();
+          setStatus("Gracias. Recibimos su mensaje y le responderemos en 1 a 2 días hábiles.", "ok");
+        })
+        .catch(function () {
+          setStatus("No pudimos enviar el mensaje. Escríbanos directamente a gerencia@h-corpus.com.", "err");
+        })
+        .then(function () {
+          submitBtn.disabled = false;
+        });
     });
   }
 })();

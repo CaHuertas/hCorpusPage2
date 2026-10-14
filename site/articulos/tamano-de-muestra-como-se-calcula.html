@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo se calcula el tamaño de muestra | hCorpus</title>
+<meta name="description" content="Los cuatro ingredientes del cálculo, el código en R para los tres casos más frecuentes, cómo ajustar por pérdidas y qué le va a preguntar el comité.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon_32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon/favicon_64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon_180.png">
+
+<meta property="og:title" content="Cómo se calcula el tamaño de muestra | hCorpus">
+<meta property="og:description" content="Los cuatro ingredientes del cálculo, el código en R para los tres casos más frecuentes, cómo ajustar por pérdidas y qué le va a preguntar el comité.">
+<meta property="og:image" content="https://h-corpus.com/assets/img/articulos/tamano-muestra.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://h-corpus.com/articulos/tamano-de-muestra-como-se-calcula">
+<meta property="article:published_time" content="2026-10-13">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="canonical" href="https://h-corpus.com/articulos/tamano-de-muestra-como-se-calcula">
+<link rel="stylesheet" href="../css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Cómo se calcula el tamaño de muestra",
+      "description": "Los cuatro ingredientes del cálculo, el código en R para los tres casos más frecuentes, cómo ajustar por pérdidas y qué le va a preguntar el comité.",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "inLanguage": "es-CO",
+      "mainEntityOfPage": "https://h-corpus.com/articulos/tamano-de-muestra-como-se-calcula",
+      "image": "https://h-corpus.com/assets/img/articulos/tamano-muestra.png",
+      "author": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://h-corpus.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Artículos",
+          "item": "https://h-corpus.com/articulos/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cómo se calcula el tamaño de muestra",
+          "item": "https://h-corpus.com/articulos/tamano-de-muestra-como-se-calcula"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="hCorpus — inicio">
+      <img src="../assets/img/logo-horizontal_transparente.png" alt="hCorpus">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li class="has-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="servicesMenu">
+            Servicios
+            <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" id="servicesMenu">
+            <a href="/servicios/asesoria-metodologica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Asesoría metodológica</strong><small>Protocolo, SAP y tamaño de muestra</small></span>
+            </a>
+            <a href="/servicios/bioestadistica-epidemiologia">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Bioestadística y epidemiología</strong><small>Regresión, supervivencia, inferencia causal</small></span>
+            </a>
+            <a href="/servicios/curaduria-datos">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Curaduría y análisis de datos</strong><small>Limpieza, EDA y reproducibilidad</small></span>
+            </a>
+            <a href="/servicios/formacion-aplicada">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 5-10 5L2 8l10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Formación aplicada</strong><small>Cursos de R, Python y bioinformática</small></span>
+            </a>
+            <a href="/servicios/genomica-transcriptomica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/><path d="M9.5 6.5h5M8.7 9.5h6.6M8.7 14.5h6.6M9.5 17.5h5"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Genómica y transcriptómica</strong><small>RNA-seq, exomas y ancestría</small></span>
+            </a>
+            <a class="nav-dropdown-all" href="/servicios/">
+              Ver todos los servicios
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </li>
+        <li><a href="/metodologia">Metodología</a></li>
+        <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+        <li><a href="/#nosotros">Nosotros</a></li>
+        <li><a href="/#sectores">Sectores</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="/#contacto">Revisión inicial gratis</a>
+      <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Abrir menú de navegación">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+  <ul>
+    <li class="mobile-has-children">
+      <div class="mobile-nav-row">
+        <a href="/servicios/">Servicios</a>
+        <button type="button" class="mobile-subnav-toggle" aria-expanded="false" aria-controls="mobileServicesSub" aria-label="Mostrar servicios">
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <ul class="mobile-subnav" id="mobileServicesSub">
+        <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+        <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+        <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+        <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+        <li><a href="/servicios/genomica-transcriptomica">Genómica y transcriptómica</a></li>
+      </ul>
+    </li>
+    <li><a href="/metodologia">Metodología</a></li>
+    <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+    <li><a href="/#nosotros">Nosotros</a></li>
+    <li><a href="/#sectores">Sectores</a></li>
+    <li><a href="/#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn btn-primary btn-block" href="/#contacto">Revisión inicial gratis</a>
+</nav>
+
+<main id="contenido">
+<article>
+
+  <!-- ENCABEZADO DEL ARTÍCULO -->
+  <header class="hero-dark">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/articulos/">Artículos</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">Cómo se calcula el tamaño de muestra</span>
+      </nav>
+      <p class="eyebrow">Diseño de estudios</p>
+      <h1>Cómo se calcula el tamaño de muestra</h1>
+      <p class="article-meta">
+        <span>Publicado el <time datetime="2026-10-13">13 de octubre de 2026</time></span>
+        <span>5 min de lectura</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- CUERPO (generado desde articulo_05_tamano_muestra.md) -->
+  <div class="container article-body">
+    <div class="prose">
+<p class="lead-answer">Todo cálculo de tamaño de muestra necesita cuatro cosas: el nivel de significancia, la potencia, el tamaño del efecto que quiere poder detectar y la variabilidad del desenlace. Las dos primeras son convención. Las dos últimas tiene que aportarlas usted, y ahí es donde se traba el 90 % de los anteproyectos.</p>
+
+<h2>Los cuatro ingredientes</h2>
+
+<p><strong>El nivel de significancia (α).</strong> Casi siempre 0,05 a dos colas. Es la probabilidad que acepta de concluir que hay un efecto cuando no lo hay.</p>
+
+<p><strong>La potencia (1 − β).</strong> 80 % es el mínimo habitual; 90 % si el estudio es caro o irrepetible. Es la probabilidad de detectar el efecto si de verdad existe.</p>
+
+<p><strong>El tamaño del efecto.</strong> La diferencia mínima que, si existe, usted no se quiere perder. <strong>No</strong> es la diferencia que espera encontrar, y mucho menos la que necesita para que le dé significativo. Es una decisión clínica, no estadística.</p>
+
+<p><strong>La variabilidad.</strong> Para un desenlace continuo, la desviación estándar. Para uno binario, la proporción de eventos en el grupo control.</p>
+
+<p>Con esos cuatro, el número sale solo. Sin ellos no hay cálculo posible, y es por eso que pedir «¿cuántos pacientes necesito?» sin más contexto no tiene respuesta.</p>
+
+<h2>De dónde salen los dos difíciles</h2>
+
+<p>Esta es la parte que los manuales saltan y el comité pregunta.</p>
+
+<p><strong>De un estudio previo parecido.</strong> La fuente más defendible. Busque un estudio con la misma población, el mismo desenlace y la misma forma de medirlo, y tome de ahí la desviación estándar o la proporción de eventos del grupo control.</p>
+
+<p><strong>De sus propios registros.</strong> Si trabaja en una institución que ya atiende a esos pacientes, la desviación estándar de su propia base histórica es mejor dato que el de un estudio hecho en otro país.</p>
+
+<p><strong>De la relevancia clínica, para el efecto.</strong> Pregúntele a los clínicos del grupo: ¿cuánto tendría que mejorar esto para que usted cambiara de conducta? Esa respuesta, y no un estudio ajeno, es la que debe entrar al cálculo.</p>
+
+<p><strong>De un estudio piloto, con cuidado.</strong> Sirve para estimar la variabilidad. <strong>No sirve para estimar el tamaño del efecto:</strong> los pilotos son pequeños, sus estimaciones son inestables, y usar el efecto observado en un piloto lleva de forma sistemática a estudios con menos potencia de la calculada.</p>
+
+<h2>Los tres casos frecuentes, en R</h2>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">install.packages("pwr")
+library(pwr)</code></pre></div>
+
+<h3>Comparar dos medias</h3>
+
+<p>Desenlace continuo, dos grupos. Supongamos que una diferencia de 5 puntos es clínicamente relevante y que la desviación estándar conocida es de 12 puntos.</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">pwr.t.test(d = 5 / 12, sig.level = 0.05, power = 0.80, type = "two.sample")</code></pre></div>
+
+<p>Da alrededor de <strong>92 participantes por grupo</strong>, 184 en total.</p>
+
+<p>El cociente <code>5/12</code> es la d de Cohen: la diferencia expresada en desviaciones estándar. Es útil tener la intuición de la escala: con d = 0,2 necesita unos 394 por grupo, con d = 0,5 unos 64, y con d = 0,8 unos 26. La relación es cuadrática, así que detectar un efecto la mitad de grande cuesta cuatro veces más pacientes.</p>
+
+<figure>
+<img src="/assets/img/articulos/tamano-muestra.webp" alt="Curva que muestra cómo crece el tamaño de muestra requerido a medida que disminuye el tamaño del efecto esperado" width="1300" height="1040" loading="lazy" decoding="async">
+</figure>
+
+<h3>Comparar dos proporciones</h3>
+
+<p>Desenlace binario. Supongamos 30 % de eventos en el control y que le interesa detectar un aumento a 45 %.</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">pwr.2p.test(h = ES.h(0.45, 0.30), sig.level = 0.05, power = 0.80)</code></pre></div>
+
+<p>Da alrededor de <strong>162 por grupo</strong>, 324 en total.</p>
+
+<p><code>ES.h()</code> hace una transformación necesaria para que el cálculo funcione bien con proporciones; no hay que entenderla para usarla, pero sí hay que usarla en vez de meter la diferencia cruda.</p>
+
+<h3>Desenlace de tiempo hasta el evento</h3>
+
+<p>Aquí lo que se calcula primero no es el número de pacientes, sino el <strong>número de eventos</strong>. Para dos grupos de igual tamaño, con α = 0,05 y potencia del 80 %:</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">eventos &lt;- function(hr) ceiling(4 * (1.96 + 0.84)^2 / log(hr)^2)
+eventos(0.70)   # 247 eventos
+eventos(0.80)   # 630 eventos</code></pre></div>
+
+<p>Un hazard ratio de 0,70 necesita unos 247 eventos; uno de 0,80, unos 630. Después hay que traducir eventos a pacientes, y eso depende de la incidencia esperada y del tiempo de seguimiento: si espera que el 40 % de los participantes tenga el evento durante el seguimiento previsto, necesita del orden de 247 / 0,40 ≈ 618 pacientes.</p>
+
+<p>Es la razón por la que los estudios de supervivencia con desenlaces poco frecuentes son tan grandes, y por la que alargar el seguimiento a veces sale más barato que reclutar más gente.</p>
+
+<h2>Ajustar por pérdidas</h2>
+
+<p>El número que salió es el que necesita <strong>al final</strong>. Si espera perder un 15 % en el seguimiento:</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">n_final &lt;- ceiling(184 / (1 - 0.15))   # 217</code></pre></div>
+
+<p>Es una división, no una resta. Sumarle un 15 % al total, que es el error común, deja el estudio corto.</p>
+
+<h2>Lo que el comité va a preguntar</h2>
+
+<p><strong>¿De dónde salió la diferencia que quiere detectar?</strong> Necesita una justificación clínica o una referencia. «Es la que me da significativo con los pacientes que tengo» no pasa.</p>
+
+<p><strong>¿Y la desviación estándar?</strong> Referencia o datos propios.</p>
+
+<p><strong>¿Qué pasa si el efecto es más pequeño?</strong> Prepare dos o tres escenarios y preséntelos en una tabla. Esto es análisis de sensibilidad, demuestra que el cálculo no es un número sacado de una calculadora en línea, y es lo que más tranquiliza a un comité.</p>
+
+<p><strong>¿Y si no alcanza a reclutar esa cantidad?</strong> La respuesta honesta no es bajar la potencia hasta que cuadre. Es reconsiderar el desenlace, extender el periodo de reclutamiento, abrir más centros, o reconocer que el estudio responderá una pregunta más modesta.</p>
+
+<h2>Dos errores que invalidan el cálculo</h2>
+
+<p><strong>Calcular la potencia después.</strong> La «potencia post hoc», calculada con el efecto observado una vez terminado el estudio, no aporta información: es una función del valor p que ya tiene, reexpresada. Si el resultado no fue significativo, lo que informa es el intervalo de confianza, que dice qué efectos siguen siendo compatibles con sus datos. Repórtelo y no calcule potencia retrospectiva.</p>
+
+<p><strong>Calcular para un desenlace y analizar otro.</strong> El cálculo corresponde al desenlace primario, que debe ser uno solo y estar definido antes de recolectar. Si el artículo termina reportando como principal un desenlace secundario que sí dio significativo, el tamaño de muestra del protocolo dejó de aplicar.</p>
+
+<h2>Antes de llevarlo al comité</h2>
+
+<p>El párrafo de tamaño de muestra debe decir: el desenlace primario, la diferencia que se quiere detectar y de dónde salió, la variabilidad asumida y su fuente, α, potencia, la prueba o modelo previsto, el porcentaje de pérdidas asumido y el número final. Con el software y la versión usados.</p>
+
+<p>Si le falta cualquiera de esos elementos, se lo van a devolver.</p>
+    </div>
+
+    <!-- CIERRE: conecta el tema con el servicio -->
+    <aside class="callout article-closing" aria-label="Servicio relacionado">
+      <h2>¿Necesita el cálculo y el texto listos para el anteproyecto?</h2>
+      <p>En hCorpus hacemos asesoría metodológica y diseño de estudios: cálculo de tamaño de muestra con escenarios de sensibilidad, plan de análisis y el texto redactado para presentar al comité. La revisión inicial no tiene costo.</p>
+      <p><a href="/servicios/asesoria-metodologica">Conozca el servicio de asesoría metodológica</a> · <a href="/analisis-estadistico-tesis">Si es para su tesis, vea esta página</a></p>
+    </aside>
+
+    <section class="article-related" aria-labelledby="relacionados">
+      <h2 id="relacionados">Artículos relacionados</h2>
+      <div class="services-grid">
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/punto-de-corte-variable-continua">Por qué no debe partir en dos una variable continua</a></h3>
+          <p>Dicotomizar una variable continua cambia el OR según dónde se corte, pierde potencia y sesga el resultado si el corte se elige mirando los datos.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/datos-faltantes-imputacion-multiple">Datos faltantes: qué pasa cuando borra las filas incompletas</a></h3>
+          <p>Por qué borrar las filas incompletas puede sesgar sus resultados, cuándo sí es válido, y cómo hacer imputación múltiple en R con mice, paso a paso.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/tabla-1-caracteristicas-basales">Cómo hacer la Tabla 1 de un artículo científico</a></h3>
+          <p>Qué va y qué no va en la tabla de características basales, por qué no debe llevar valores p, cómo reportar los faltantes y cómo construirla en R.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+      </div>
+    </section>
+  </div>
+
+</article>
+</main>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/logo-horizontal_para-fondo-oscuro.png" alt="hCorpus">
+        <p>Bioestadística, epidemiología, bioinformática y diseño de estudios para grupos de investigación, hospitales, laboratorios de genética y empresas.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/hcorpus" target="_blank" rel="noopener" aria-label="hCorpus en LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M11.5 10H12v6"/></svg>
+          </a>
+          <a href="mailto:gerencia@h-corpus.com" aria-label="Enviar correo a hCorpus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+          <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+          <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+          <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+          <li><a href="/servicios/genomica-transcriptomica">Genómica y transcriptómica</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="/#nosotros">Nosotros</a></li>
+          <li><a href="/metodologia">Metodología</a></li>
+          <li><a href="/articulos/">Artículos</a></li>
+          <li><a href="/#sectores">Sectores</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/politica-datos">Política de tratamiento de datos</a></li>
+          <li><a href="/terminos-uso">Términos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> hCorpus S.A.S. · NIT 902.098.516-1 · Bogotá D.C., Colombia</p>
+      <div class="footer-legal">
+        <a href="/politica-datos">Política de tratamiento de datos</a>
+        <a href="/terminos-uso">Términos de uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="../js/highlight-r.js"></script>
+</body>
+</html>

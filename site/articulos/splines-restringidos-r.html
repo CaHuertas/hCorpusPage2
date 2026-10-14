@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splines cúbicos restringidos en R con rms | hCorpus</title>
+<meta name="description" content="Cómo ajustar, probar y reportar una relación no lineal con splines restringidos en R: cuántos nodos usar, la prueba de no linealidad y los contrastes.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon_32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon/favicon_64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon_180.png">
+
+<meta property="og:title" content="Splines cúbicos restringidos en R con rms | hCorpus">
+<meta property="og:description" content="Cómo ajustar, probar y reportar una relación no lineal con splines restringidos en R: cuántos nodos usar, la prueba de no linealidad y los contrastes.">
+<meta property="og:image" content="https://h-corpus.com/assets/img/articulos/splines.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://h-corpus.com/articulos/splines-restringidos-r">
+<meta property="article:published_time" content="2026-10-13">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="canonical" href="https://h-corpus.com/articulos/splines-restringidos-r">
+<link rel="stylesheet" href="../css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Splines cúbicos restringidos en R: la alternativa al punto de corte",
+      "description": "Cómo ajustar, probar y reportar una relación no lineal con splines restringidos en R: cuántos nodos usar, la prueba de no linealidad y los contrastes.",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "inLanguage": "es-CO",
+      "mainEntityOfPage": "https://h-corpus.com/articulos/splines-restringidos-r",
+      "image": "https://h-corpus.com/assets/img/articulos/splines.png",
+      "author": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://h-corpus.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Artículos",
+          "item": "https://h-corpus.com/articulos/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Splines cúbicos restringidos en R: la alternativa al punto de corte",
+          "item": "https://h-corpus.com/articulos/splines-restringidos-r"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="hCorpus — inicio">
+      <img src="../assets/img/logo-horizontal_transparente.png" alt="hCorpus">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li class="has-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="servicesMenu">
+            Servicios
+            <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" id="servicesMenu">
+            <a href="/servicios/asesoria-metodologica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Asesoría metodológica</strong><small>Protocolo, SAP y tamaño de muestra</small></span>
+            </a>
+            <a href="/servicios/bioestadistica-epidemiologia">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Bioestadística y epidemiología</strong><small>Regresión, supervivencia, inferencia causal</small></span>
+            </a>
+            <a href="/servicios/curaduria-datos">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Curaduría y análisis de datos</strong><small>Limpieza, EDA y reproducibilidad</small></span>
+            </a>
+            <a href="/servicios/formacion-aplicada">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 5-10 5L2 8l10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Formación aplicada</strong><small>Cursos de R, Python y bioinformática</small></span>
+            </a>
+            <a href="/servicios/genomica-transcriptomica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/><path d="M9.5 6.5h5M8.7 9.5h6.6M8.7 14.5h6.6M9.5 17.5h5"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Genómica y transcriptómica</strong><small>RNA-seq, exomas y ancestría</small></span>
+            </a>
+            <a class="nav-dropdown-all" href="/servicios/">
+              Ver todos los servicios
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </li>
+        <li><a href="/metodologia">Metodología</a></li>
+        <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+        <li><a href="/#nosotros">Nosotros</a></li>
+        <li><a href="/#sectores">Sectores</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="/#contacto">Revisión inicial gratis</a>
+      <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Abrir menú de navegación">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+  <ul>
+    <li class="mobile-has-children">
+      <div class="mobile-nav-row">
+        <a href="/servicios/">Servicios</a>
+        <button type="button" class="mobile-subnav-toggle" aria-expanded="false" aria-controls="mobileServicesSub" aria-label="Mostrar servicios">
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <ul class="mobile-subnav" id="mobileServicesSub">
+        <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+        <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+        <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+        <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+        <li><a href="/servicios/genomica-transcriptomica">Genómica y transcriptómica</a></li>
+      </ul>
+    </li>
+    <li><a href="/metodologia">Metodología</a></li>
+    <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+    <li><a href="/#nosotros">Nosotros</a></li>
+    <li><a href="/#sectores">Sectores</a></li>
+    <li><a href="/#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn btn-primary btn-block" href="/#contacto">Revisión inicial gratis</a>
+</nav>
+
+<main id="contenido">
+<article>
+
+  <!-- ENCABEZADO DEL ARTÍCULO -->
+  <header class="hero-dark">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/articulos/">Artículos</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">Splines cúbicos restringidos en R: la alternativa al punto de corte</span>
+      </nav>
+      <p class="eyebrow">Bioestadística</p>
+      <h1>Splines cúbicos restringidos en R: la alternativa al punto de corte</h1>
+      <p class="article-meta">
+        <span>Publicado el <time datetime="2026-10-13">13 de octubre de 2026</time></span>
+        <span>4 min de lectura</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- CUERPO (generado desde articulo_04_splines.md) -->
+  <div class="container article-body">
+    <div class="prose">
+<p class="lead-answer">Un spline cúbico restringido deja que la relación entre una variable continua y el desenlace tenga la forma que tenga, sin obligarla a ser una línea recta ni un escalón. En R se ajusta con el paquete <code>rms</code> y son, en la práctica, cinco líneas:</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">dd  &lt;- datadist(datos); options(datadist = "dd")
+fit &lt;- lrm(evento ~ rcs(lbio, 3), data = datos)
+anova(fit)                                      # ¿hace falta la curva?
+Predict(fit, lbio, fun = plogis)                # la figura
+contrast(fit, list(lbio = a), list(lbio = b))   # el número que se reporta</code></pre></div>
+
+<p>Lo demás de este artículo es qué significa cada línea y dónde se equivoca la gente.</p>
+
+<h2>Qué es, sin fórmulas</h2>
+
+<p>Un spline parte el rango de la variable en tramos, usando unos puntos llamados nodos, y ajusta una curva suave en cada tramo con la condición de que peguen sin quiebres. «Restringido» significa que en los extremos la curva se obliga a ser recta, porque es donde hay menos datos y donde un polinomio libre se dispara produciendo curvas absurdas.</p>
+
+<p>El resultado es flexible en el centro, donde están sus pacientes, y disciplinado en las colas, donde no están.</p>
+
+<h2>Cuántos nodos: la decisión que más se falla</h2>
+
+<p>La guía habitual es entre 3 y 5 nodos. El criterio que casi nadie aplica bien es que <strong>lo que manda es el número de eventos, no el número de filas</strong>.</p>
+
+<p>En el ejemplo de este artículo hay 600 pacientes pero solo 167 eventos. Con 4 y con 5 nodos la curva salía con jorobas que no existen en los datos: artefactos del ajuste que alguien habría interpretado como «hay un umbral alrededor de tal valor». Con 3 nodos quedó limpia y recuperó la relación verdadera.</p>
+
+<p>La regla práctica: empiece en 3. Suba solo si tiene eventos de sobra y si la curva con más nodos cuenta una historia que se sostiene clínicamente.</p>
+
+<h2>La prueba de no linealidad</h2>
+
+<p>Esta es la línea que convierte el spline en una herramienta honesta en vez de una máquina de producir curvas.</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">anova(fit)</code></pre></div>
+
+<p>En la salida aparece una fila llamada <code>Nonlinear</code>. Prueba si los términos curvos aportan algo por encima de la línea recta. En el ejemplo dio p = 0,95: no hay evidencia de que la relación se curve.</p>
+
+<p>Eso no es un fracaso. El spline hizo exactamente lo que tenía que hacer, que era decirle si necesitaba la curva. La respuesta fue no, y lo correcto es quedarse con el modelo lineal y reportar que se verificó. Es un resultado, y casi nadie lo publica.</p>
+
+<p>Lo que no se vale es ajustar el spline, ver que la prueba no da, y pintar la curva igual porque se ve más sofisticada.</p>
+
+<h2>Cómo se reporta</h2>
+
+<p>Un spline no tiene «un coeficiente». Tiene una curva. Los coeficientes de los términos del spline no significan nada por separado y no deben ir en una tabla.</p>
+
+<p>Lo que va en el artículo son dos cosas:</p>
+
+<p><strong>La figura</strong>, con la curva y su banda de confianza. El lector ve la forma real de la relación, que es información que ninguna tabla transmite.</p>
+
+<p><strong>Dos o tres contrastes</strong> entre valores con sentido clínico, con su intervalo:</p>
+
+<div class="service-table-wrap">
+<table class="service-table">
+<thead><tr><th scope="col">Comparación</th><th scope="col">OR</th><th scope="col">IC 95 %</th></tr></thead>
+<tbody>
+<tr><th scope="row">Percentil 75 frente a percentil 25</th><td>1,43</td><td>1,13 a 1,81</td></tr>
+<tr><th scope="row">Percentil 90 frente a percentil 10</th><td>1,98</td><td>1,27 a 3,07</td></tr>
+<tr><th scope="row">Percentil 75 frente a la mediana</th><td>1,20</td><td>1,04 a 1,38</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure>
+<img src="/assets/img/articulos/splines.webp" alt="Curva ajustada con spline cúbico restringido y su banda de confianza, comparada con el escalón que supone un modelo dicotomizado" width="1479" height="1682" loading="lazy" decoding="async">
+</figure>
+
+<p>Eso lo interpreta un clínico. «El coeficiente del segundo término del spline» no.</p>
+
+<p>En R:</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">k &lt;- contrast(fit, list(lbio = log(valor_alto)),
+                   list(lbio = log(valor_bajo)))
+exp(c(k$Contrast, k$Lower, k$Upper))</code></pre></div>
+
+<h2>Detalles prácticos</h2>
+
+<p><strong>Transforme antes si la variable es muy asimétrica.</strong> En biomarcadores de laboratorio suele convenir ajustar el spline sobre el logaritmo y después volver a la escala original para la figura. Precalcule la columna transformada en vez de escribir la transformación dentro de la fórmula: <code>datadist</code> y <code>Predict</code> se comportan mejor así.</p>
+
+<p><strong>Los nodos van en percentiles, no en valores redondos.</strong> <code>rms</code> lo hace por defecto, y es lo correcto: así cada tramo tiene una cantidad parecida de datos.</p>
+
+<p><strong>No interprete la curva en las colas.</strong> Donde hay tres pacientes, la banda de confianza se abre y lo que se ve es ruido con forma de hallazgo.</p>
+
+<h2>Los tres errores frecuentes</h2>
+
+<ol>
+<li><strong>Demasiados nodos para los eventos disponibles.</strong> Produce jorobas que son ruido.</li>
+<li><strong>No reportar la prueba de no linealidad.</strong> Si el término curvo no aporta, dígalo y quédese con el modelo lineal.</li>
+<li><strong>Reportar coeficientes del spline.</strong> No se interpretan. Figura más contrastes.</li>
+</ol>
+
+<p>Si venía de <a href="/articulos/punto-de-corte-variable-continua">por qué no debe partir en dos una variable continua</a>, esto es lo que gana al no cortar: no tiene que escoger un umbral que no existe, no pierde potencia, y conoce la forma de la relación en todo el rango en vez de en dos cajones.</p>
+
+<p><strong>Referencia:</strong> Harrell FE. <em>Regression Modeling Strategies</em>, 2.ª edición. Springer, 2015.</p>
+    </div>
+
+    <!-- CIERRE: conecta el tema con el servicio -->
+    <aside class="callout article-closing" aria-label="Servicio relacionado">
+      <h2>¿Tiene una relación que sospecha que no es lineal y no sabe cómo modelarla?</h2>
+      <p>En hCorpus hacemos bioestadística y epidemiología clínica para grupos de investigación, hospitales y laboratorios en Colombia. La revisión inicial no tiene costo.</p>
+      <p><a href="/servicios/bioestadistica-epidemiologia">Conozca el servicio de bioestadística y epidemiología</a></p>
+    </aside>
+
+    <section class="article-related" aria-labelledby="relacionados">
+      <h2 id="relacionados">Artículos relacionados</h2>
+      <div class="services-grid">
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/punto-de-corte-variable-continua">Por qué no debe partir en dos una variable continua</a></h3>
+          <p>Dicotomizar una variable continua cambia el OR según dónde se corte, pierde potencia y sesga el resultado si el corte se elige mirando los datos.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/tamano-de-muestra-como-se-calcula">Cómo se calcula el tamaño de muestra</a></h3>
+          <p>Los cuatro ingredientes del cálculo, el código en R para los tres casos más frecuentes, cómo ajustar por pérdidas y qué le va a preguntar el comité.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/datos-faltantes-imputacion-multiple">Datos faltantes: qué pasa cuando borra las filas incompletas</a></h3>
+          <p>Por qué borrar las filas incompletas puede sesgar sus resultados, cuándo sí es válido, y cómo hacer imputación múltiple en R con mice, paso a paso.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+      </div>
+    </section>
+  </div>
+
+</article>
+</main>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/logo-horizontal_para-fondo-oscuro.png" alt="hCorpus">
+        <p>Bioestadística, epidemiología, bioinformática y diseño de estudios para grupos de investigación, hospitales, laboratorios de genética y empresas.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/hcorpus" target="_blank" rel="noopener" aria-label="hCorpus en LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M11.5 10H12v6"/></svg>
+          </a>
+          <a href="mailto:gerencia@h-corpus.com" aria-label="Enviar correo a hCorpus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+          <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+          <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+          <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+          <li><a href="/servicios/genomica-transcriptomica">Genómica y transcriptómica</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="/#nosotros">Nosotros</a></li>
+          <li><a href="/metodologia">Metodología</a></li>
+          <li><a href="/articulos/">Artículos</a></li>
+          <li><a href="/#sectores">Sectores</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/politica-datos">Política de tratamiento de datos</a></li>
+          <li><a href="/terminos-uso">Términos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> hCorpus S.A.S. · NIT 902.098.516-1 · Bogotá D.C., Colombia</p>
+      <div class="footer-legal">
+        <a href="/politica-datos">Política de tratamiento de datos</a>
+        <a href="/terminos-uso">Términos de uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="../js/highlight-r.js"></script>
+</body>
+</html>

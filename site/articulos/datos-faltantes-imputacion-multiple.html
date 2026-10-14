@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datos faltantes e imputación múltiple | hCorpus</title>
+<meta name="description" content="Por qué borrar las filas incompletas puede sesgar sus resultados, cuándo sí es válido, y cómo hacer imputación múltiple en R con mice, paso a paso.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon_32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon/favicon_64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon_180.png">
+
+<meta property="og:title" content="Datos faltantes e imputación múltiple | hCorpus">
+<meta property="og:description" content="Por qué borrar las filas incompletas puede sesgar sus resultados, cuándo sí es válido, y cómo hacer imputación múltiple en R con mice, paso a paso.">
+<meta property="og:image" content="https://h-corpus.com/assets/img/articulos/datos-faltantes.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://h-corpus.com/articulos/datos-faltantes-imputacion-multiple">
+<meta property="article:published_time" content="2026-10-13">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="canonical" href="https://h-corpus.com/articulos/datos-faltantes-imputacion-multiple">
+<link rel="stylesheet" href="../css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Datos faltantes: qué pasa cuando borra las filas incompletas",
+      "description": "Por qué borrar las filas incompletas puede sesgar sus resultados, cuándo sí es válido, y cómo hacer imputación múltiple en R con mice, paso a paso.",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "inLanguage": "es-CO",
+      "mainEntityOfPage": "https://h-corpus.com/articulos/datos-faltantes-imputacion-multiple",
+      "image": "https://h-corpus.com/assets/img/articulos/datos-faltantes.png",
+      "author": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://h-corpus.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Artículos",
+          "item": "https://h-corpus.com/articulos/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Datos faltantes: qué pasa cuando borra las filas incompletas",
+          "item": "https://h-corpus.com/articulos/datos-faltantes-imputacion-multiple"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="hCorpus — inicio">
+      <img src="../assets/img/logo-horizontal_transparente.png" alt="hCorpus">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li class="has-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="servicesMenu">
+            Servicios
+            <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" id="servicesMenu">
+            <a href="/servicios/asesoria-metodologica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Asesoría metodológica</strong><small>Protocolo, SAP y tamaño de muestra</small></span>
+            </a>
+            <a href="/servicios/bioestadistica-epidemiologia">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Bioestadística y epidemiología</strong><small>Regresión, supervivencia, inferencia causal</small></span>
+            </a>
+            <a href="/servicios/curaduria-datos">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Curaduría y análisis de datos</strong><small>Limpieza, EDA y reproducibilidad</small></span>
+            </a>
+            <a href="/servicios/formacion-aplicada">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 5-10 5L2 8l10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Formación aplicada</strong><small>Cursos de R, Python y bioinformática</small></span>
+            </a>
+            <a href="/servicios/genomica-transcriptomica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/><path d="M9.5 6.5h5M8.7 9.5h6.6M8.7 14.5h6.6M9.5 17.5h5"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Genómica y transcriptómica</strong><small>RNA-seq, exomas y ancestría</small></span>
+            </a>
+            <a class="nav-dropdown-all" href="/servicios/">
+              Ver todos los servicios
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </li>
+        <li><a href="/metodologia">Metodología</a></li>
+        <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+        <li><a href="/#nosotros">Nosotros</a></li>
+        <li><a href="/#sectores">Sectores</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="/#contacto">Revisión inicial gratis</a>
+      <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Abrir menú de navegación">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+  <ul>
+    <li class="mobile-has-children">
+      <div class="mobile-nav-row">
+        <a href="/servicios/">Servicios</a>
+        <button type="button" class="mobile-subnav-toggle" aria-expanded="false" aria-controls="mobileServicesSub" aria-label="Mostrar servicios">
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <ul class="mobile-subnav" id="mobileServicesSub">
+        <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+        <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+        <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+        <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+        <li><a href="/servicios/genomica-transcriptomica">Genómica y transcriptómica</a></li>
+      </ul>
+    </li>
+    <li><a href="/metodologia">Metodología</a></li>
+    <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+    <li><a href="/#nosotros">Nosotros</a></li>
+    <li><a href="/#sectores">Sectores</a></li>
+    <li><a href="/#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn btn-primary btn-block" href="/#contacto">Revisión inicial gratis</a>
+</nav>
+
+<main id="contenido">
+<article>
+
+  <!-- ENCABEZADO DEL ARTÍCULO -->
+  <header class="hero-dark">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/articulos/">Artículos</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">Datos faltantes: qué pasa cuando borra las filas incompletas</span>
+      </nav>
+      <p class="eyebrow">Bioestadística</p>
+      <h1>Datos faltantes: qué pasa cuando borra las filas incompletas</h1>
+      <p class="article-meta">
+        <span>Publicado el <time datetime="2026-10-13">13 de octubre de 2026</time></span>
+        <span>5 min de lectura</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- CUERPO (generado desde articulo_02_datos_faltantes.md) -->
+  <div class="container article-body">
+    <div class="prose">
+<p class="lead-answer">Casi todo el software estadístico, por defecto, elimina de un modelo cualquier fila a la que le falte un valor. Eso se llama análisis de casos completos, y funciona bien solo en una situación: cuando lo que falta, falta por puro azar. Si lo que falta tiene algo que ver con lo que usted está midiendo, borrar esas filas no le quita precisión, le cambia la respuesta.</p>
+
+<p>Este artículo muestra cuándo pasa, con un ejemplo donde se puede ver, y cómo se resuelve.</p>
+
+<h2>Las tres maneras de faltar</h2>
+
+<p>Los nombres son técnicos pero la idea no.</p>
+
+<p><strong>MCAR, completamente al azar.</strong> El dato se perdió por una razón que no tiene nada que ver con el estudio: se dañó un tubo, se cayó el sistema un martes. Aquí borrar las filas incompletas es válido. Pierde precisión, porque se queda con menos pacientes, pero no se sesga.</p>
+
+<p><strong>MAR, al azar condicional.</strong> La probabilidad de que falte depende de otras variables que usted sí midió. Por ejemplo: a los pacientes mayores se les pidió menos veces cierto laboratorio, y usted tiene la edad de todos. Aquí hay solución, y es la imputación múltiple.</p>
+
+<p><strong>MNAR, no al azar.</strong> La probabilidad de que falte depende del valor que habría tenido. Los pacientes que se sentían peor dejaron de asistir a los controles, y justamente lo que no tiene es la medición de los que estaban peor. Este caso no se arregla con ninguna técnica estadística. Lo que se hace es un análisis de sensibilidad y se declara el supuesto.</p>
+
+<p>El problema práctico: los datos no vienen con una etiqueta que diga cuál de los tres son. Lo que sí se puede hacer es mirar si la ausencia se relaciona con las variables observadas, y razonar clínicamente sobre el mecanismo.</p>
+
+<h2>Un ejemplo donde se ve el daño</h2>
+
+<p>Simulamos 500 pacientes en dos grupos. Con todos los datos, la diferencia estimada entre los grupos es de 3,63 unidades: ese es el valor de referencia. Después hacemos que la gravedad al ingreso se pierda con más probabilidad en los pacientes con desenlace alto. Es decir: la ausencia depende de lo que estamos midiendo.</p>
+
+<p>Con esa pérdida, quedan completas 238 de las 500 filas.</p>
+
+<div class="service-table-wrap">
+<table class="service-table">
+<thead><tr><th scope="col">Método</th><th scope="col">Diferencia estimada</th><th scope="col">IC 95 %</th><th scope="col">n</th></tr></thead>
+<tbody>
+<tr><th scope="row">Sin pérdida de datos (referencia)</th><td>3,63</td><td>3,09 a 4,17</td><td>500</td></tr>
+<tr><th scope="row">Solo casos completos</th><td>3,28</td><td>2,55 a 4,01</td><td>238</td></tr>
+<tr><th scope="row">Imputación múltiple</th><td>3,74</td><td>3,13 a 4,36</td><td>500</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure>
+<img src="/assets/img/articulos/datos-faltantes.webp" alt="Gráfico que compara la estimación del efecto con datos completos, con análisis de casos completos y con imputación múltiple" width="1300" height="1040" loading="lazy" decoding="async">
+</figure>
+
+<p>Los números exactos dependen de la simulación; lo que importa es la dirección. El análisis de casos completos botó más de la mitad de los pacientes y, además de perder precisión, movió la estimación cerca de un 10 % hacia abajo. No es ruido: es un sesgo, y aparece cada vez que la ausencia depende del desenlace. La imputación múltiple usó a los 500 y quedó cerca del valor de referencia.</p>
+
+<h2>Qué es la imputación múltiple</h2>
+
+<p>No es «rellenar los huecos con el promedio». Rellenar con el promedio es la peor opción posible: inventa certeza donde no la hay, encoge la varianza y produce intervalos de confianza falsamente angostos.</p>
+
+<p>La imputación múltiple hace otra cosa:</p>
+
+<ol>
+<li>Crea varias copias completas de la base (20 o 25 es lo habitual), cada una con los faltantes rellenados usando un modelo que incluye el resto de variables, más un componente aleatorio.</li>
+<li>Corre el análisis en cada copia por separado.</li>
+<li>Combina los resultados con las reglas de Rubin, que suman dos fuentes de incertidumbre: la de siempre, y la de no saber cuál era el valor verdadero.</li>
+</ol>
+
+<p>Ese segundo componente es la razón de ser del método. El resultado final dice «no sé exactamente qué había ahí, y eso está reflejado en el intervalo».</p>
+
+<h2>Cómo se hace en R</h2>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">library(mice)
+
+# 1. Mirar primero qué falta y dónde
+colSums(is.na(datos))
+md.pattern(datos)
+
+# 2. Imputar
+imp &lt;- mice(datos, m = 25, method = "pmm", seed = 2026, printFlag = FALSE)
+
+# 3. Correr el análisis en cada copia
+fit &lt;- with(imp, lm(desenlace ~ grupo + gravedad + edad))
+
+# 4. Combinar con las reglas de Rubin
+summary(pool(fit), conf.int = TRUE)</code></pre></div>
+
+<p><code>method = "pmm"</code> es <em>predictive mean matching</em>: en vez de inventar un número, toma el de un paciente real con predicción parecida. Eso mantiene los valores dentro de rangos plausibles y respeta distribuciones raras.</p>
+
+<h3>Tres decisiones que casi nadie documenta</h3>
+
+<p><strong>Cuántas imputaciones.</strong> La regla vieja decía 5. Hoy la recomendación es usar al menos tantas como el porcentaje de casos incompletos: si el 30 % de las filas tiene algún faltante, use 30. Imputar de más cuesta segundos de cómputo; imputar de menos cuesta estabilidad en el resultado.</p>
+
+<p><strong>Qué variables entran al modelo de imputación.</strong> Más de las que entran al análisis. Una variable que no es de interés pero que predice bien lo que falta —un laboratorio auxiliar, una escala relacionada— hace más creíble el supuesto MAR. Dejarla por fuera es desaprovechar información que ya tiene.</p>
+
+<p><strong>El desenlace entra.</strong> Suena contraintuitivo, pero excluirlo sesga las imputaciones hacia la hipótesis nula.</p>
+
+<h2>Qué se escribe en el artículo</h2>
+
+<p>Sea cual sea el método, en Métodos debe quedar:</p>
+
+<ul>
+<li>Cuántos faltantes hubo, por variable, y qué porcentaje</li>
+<li>Qué mecanismo se asumió y por qué</li>
+<li>Qué método se usó, con cuántas imputaciones y qué variables entraron</li>
+<li>Si el análisis de casos completos da algo distinto, dígalo: eso es el análisis de sensibilidad</li>
+</ul>
+
+<p>Esa última línea es la que distingue un manuscrito que resiste revisión de uno que no. Si los dos métodos coinciden, usted tiene un argumento fuerte. Si no coinciden, acaba de encontrar algo sobre sus datos que vale la pena entender.</p>
+
+<h2>Cuándo no vale la pena</h2>
+
+<p>Si falta menos del 5 % y la ausencia no tiene patrón, casos completos está bien y la imputación agrega complejidad sin cambiar nada.</p>
+
+<p>Si falta más del 40 % de una variable, ninguna técnica la va a recuperar. Ahí la conversación es si esa variable entra al análisis.</p>
+    </div>
+
+    <!-- CIERRE: conecta el tema con el servicio -->
+    <aside class="callout article-closing" aria-label="Servicio relacionado">
+      <h2>¿Tiene una base con huecos y no sabe qué tanto comprometen su análisis?</h2>
+      <p>En hCorpus hacemos curaduría y análisis de datos para grupos de investigación, hospitales y laboratorios en Colombia. En la revisión inicial, que no tiene costo, le decimos por escrito qué encontramos en su base.</p>
+      <p><a href="/servicios/curaduria-datos">Conozca el servicio de curaduría y análisis de datos</a></p>
+    </aside>
+
+    <section class="article-related" aria-labelledby="relacionados">
+      <h2 id="relacionados">Artículos relacionados</h2>
+      <div class="services-grid">
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/tabla-1-caracteristicas-basales">Cómo hacer la Tabla 1 de un artículo científico</a></h3>
+          <p>Qué va y qué no va en la tabla de características basales, por qué no debe llevar valores p, cómo reportar los faltantes y cómo construirla en R.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/punto-de-corte-variable-continua">Por qué no debe partir en dos una variable continua</a></h3>
+          <p>Dicotomizar una variable continua cambia el OR según dónde se corte, pierde potencia y sesga el resultado si el corte se elige mirando los datos.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/tamano-de-muestra-como-se-calcula">Cómo se calcula el tamaño de muestra</a></h3>
+          <p>Los cuatro ingredientes del cálculo, el código en R para los tres casos más frecuentes, cómo ajustar por pérdidas y qué le va a preguntar el comité.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+      </div>
+    </section>
+  </div>
+
+</article>
+</main>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/logo-horizontal_para-fondo-oscuro.png" alt="hCorpus">
+        <p>Bioestadística, epidemiología, bioinformática y diseño de estudios para grupos de investigación, hospitales, laboratorios de genética y empresas.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/hcorpus" target="_blank" rel="noopener" aria-label="hCorpus en LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M11.5 10H12v6"/></svg>
+          </a>
+          <a href="mailto:gerencia@h-corpus.com" aria-label="Enviar correo a hCorpus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+          <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+          <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+          <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+          <li><a href="/servicios/genomica-transcriptomica">Genómica y transcriptómica</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="/#nosotros">Nosotros</a></li>
+          <li><a href="/metodologia">Metodología</a></li>
+          <li><a href="/articulos/">Artículos</a></li>
+          <li><a href="/#sectores">Sectores</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/politica-datos">Política de tratamiento de datos</a></li>
+          <li><a href="/terminos-uso">Términos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> hCorpus S.A.S. · NIT 902.098.516-1 · Bogotá D.C., Colombia</p>
+      <div class="footer-legal">
+        <a href="/politica-datos">Política de tratamiento de datos</a>
+        <a href="/terminos-uso">Términos de uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="../js/highlight-r.js"></script>
+</body>
+</html>

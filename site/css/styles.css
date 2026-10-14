@@ -1561,3 +1561,10 @@ input:focus, textarea:focus{
   margin-bottom: var(--space-xs);
 }
 .article-card-meta .service-tags{ margin: 0; }
+
+/* Artículos relacionados, al final de cada artículo */
+.article-related{ margin-top: var(--space-3xl); }
+.article-related h2{
+  font-size: clamp(1.35rem, 1.15rem + 0.8vw, 1.7rem);
+  margin-bottom: var(--space-lg);
+}

@@ -484,6 +484,7 @@ def main():
     arts.sort(key=lambda a: (a["fecha"], a["orden"]), reverse=True)
     conv = Conversor({a["slug"] for a in arts})
     cab, pie = cascaron()
+    pie = subir_un_nivel(pie)  # el pie también trae rutas relativas (logo, js/main.js)
     print(f"Artículos ({len(arts)}):")
     for a in arts:
         construir_articulo(a, arts, conv, cab, pie)

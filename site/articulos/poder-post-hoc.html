@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Potencia post hoc: por qué no sirve | hCorpus</title>
+<meta name="description" content="El poder observado es una función del valor p que ya tiene. Qué reportar en su lugar cuando un resultado no alcanza significancia estadística.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon_32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon/favicon_64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon_180.png">
+
+<meta property="og:title" content="Potencia post hoc: por qué no sirve | hCorpus">
+<meta property="og:description" content="El poder observado es una función del valor p que ya tiene. Qué reportar en su lugar cuando un resultado no alcanza significancia estadística.">
+<meta property="og:image" content="https://h-corpus.com/assets/img/articulos/poder-post-hoc.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://h-corpus.com/articulos/poder-post-hoc">
+<meta property="article:published_time" content="2026-10-27">
+
+<link rel="canonical" href="https://h-corpus.com/articulos/poder-post-hoc">
+<link rel="stylesheet" href="../css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Por qué la potencia post hoc no dice nada",
+      "description": "El poder observado es una función del valor p que ya tiene. Qué reportar en su lugar cuando un resultado no alcanza significancia estadística.",
+      "datePublished": "2026-10-27",
+      "dateModified": "2026-10-27",
+      "inLanguage": "es-CO",
+      "mainEntityOfPage": "https://h-corpus.com/articulos/poder-post-hoc",
+      "image": "https://h-corpus.com/assets/img/articulos/poder-post-hoc.png",
+      "author": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "HCORPUS S.A.S.",
+        "url": "https://h-corpus.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://h-corpus.com/assets/img/logo-horizontal_transparente.png"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://h-corpus.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Artículos",
+          "item": "https://h-corpus.com/articulos/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Por qué la potencia post hoc no dice nada",
+          "item": "https://h-corpus.com/articulos/poder-post-hoc"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="hCorpus — inicio">
+      <img src="../assets/img/logo-horizontal_transparente.webp" width="312" height="102" alt="hCorpus">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li class="has-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="servicesMenu">
+            Servicios
+            <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" id="servicesMenu">
+            <a href="/servicios/asesoria-metodologica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Asesoría metodológica</strong><small>Protocolo, SAP y tamaño de muestra</small></span>
+            </a>
+            <a href="/servicios/bioestadistica-epidemiologia">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Bioestadística y epidemiología</strong><small>Regresión, supervivencia, inferencia causal</small></span>
+            </a>
+            <a href="/servicios/curaduria-datos">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Curaduría y análisis de datos</strong><small>Limpieza, EDA y reproducibilidad</small></span>
+            </a>
+            <a href="/servicios/farmacoeconomia">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Farmacoeconomía</strong><small>Costo-efectividad e impacto presupuestal</small></span>
+            </a>
+            <a href="/servicios/analisis-omicos">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/><path d="M9.5 6.5h5M8.7 9.5h6.6M8.7 14.5h6.6M9.5 17.5h5"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Análisis ómicos</strong><small>RNA-seq, farmacogenómica, proteómica</small></span>
+            </a>
+            <a href="/servicios/formacion-aplicada">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 5-10 5L2 8l10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Formación aplicada</strong><small>Cursos de R, Python y bioinformática</small></span>
+            </a>
+            <a class="nav-dropdown-all" href="/servicios/">
+              Ver todos los servicios
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </li>
+        <li><a href="/metodologia">Metodología</a></li>
+        <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+        <li><a href="/#nosotros">Nosotros</a></li>
+        <li><a href="/#sectores">Sectores</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="/#contacto">Revisión inicial gratis</a>
+      <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Abrir menú de navegación">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+  <ul>
+    <li class="mobile-has-children">
+      <div class="mobile-nav-row">
+        <a href="/servicios/">Servicios</a>
+        <button type="button" class="mobile-subnav-toggle" aria-expanded="false" aria-controls="mobileServicesSub" aria-label="Mostrar servicios">
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <ul class="mobile-subnav" id="mobileServicesSub">
+        <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+        <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+        <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+        <li><a href="/servicios/farmacoeconomia">Farmacoeconomía</a></li>
+        <li><a href="/servicios/analisis-omicos">Análisis ómicos</a></li>
+        <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+      </ul>
+    </li>
+    <li><a href="/metodologia">Metodología</a></li>
+    <li><a href="/articulos/" aria-current="page">Artículos</a></li>
+    <li><a href="/#nosotros">Nosotros</a></li>
+    <li><a href="/#sectores">Sectores</a></li>
+    <li><a href="/#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn btn-primary btn-block" href="/#contacto">Revisión inicial gratis</a>
+</nav>
+
+<main id="contenido">
+<article>
+
+  <!-- ENCABEZADO DEL ARTÍCULO -->
+  <header class="hero-dark">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/articulos/">Artículos</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">Por qué la potencia post hoc no dice nada</span>
+      </nav>
+      <p class="eyebrow">Bioestadística</p>
+      <h1>Por qué la potencia post hoc no dice nada</h1>
+      <p class="article-meta">
+        <span>Publicado el <time datetime="2026-10-27">27 de octubre de 2026</time></span>
+        <span>3 min de lectura</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- CUERPO (generado desde articulo_07_poder_post_hoc.md) -->
+  <div class="container article-body">
+    <div class="prose">
+<p class="lead-answer">La potencia observada, calculada después del estudio con el efecto que se obtuvo, no aporta información nueva: está determinada por completo por el valor p. Reportarla es repetir el mismo dato dos veces. Lo que sí responde la pregunta «¿me quedó corto el estudio?» es el intervalo de confianza, leído contra la diferencia mínima clínicamente relevante.</p>
+
+<h2>La relación es una función, no una estimación</h2>
+
+<p>Para una prueba de dos colas con α = 0,05, dado el valor p obtenido, el poder observado queda fijado:</p>
+
+<div class="service-table-wrap">
+<table class="service-table">
+<thead><tr><th scope="col">Valor p</th><th scope="col">Poder observado</th></tr></thead>
+<tbody>
+<tr><th scope="row">0,01</th><td>73 %</td></tr>
+<tr><th scope="row">0,05</th><td>50 %</td></tr>
+<tr><th scope="row">0,10</th><td>38 %</td></tr>
+<tr><th scope="row">0,20</th><td>25 %</td></tr>
+<tr><th scope="row">0,50</th><td>10 %</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure>
+<img src="/assets/img/articulos/poder-post-hoc.webp" alt="Curva que muestra la relación determinística entre el valor p y el poder observado, y un intervalo de confianza frente a la diferencia mínima relevante" width="1479" height="1653" loading="lazy" decoding="async">
+</figure>
+
+<p>No hay datos ahí. No hay muestra, no hay supuestos, no hay área clínica. Con p exactamente 0,05 el poder observado es del 50 %, siempre: con 40 pacientes o con 4.000, en cardiología o en oncología.</p>
+
+<p>De ahí que la frase «la potencia observada fue del 29 %, lo que sugiere que el estudio estuvo subdimensionado» equivalga a decir «el valor p fue 0,16», que ya estaba escrito tres líneas antes.</p>
+
+<h2>Por qué la potencia solo sirve antes</h2>
+
+<p>El cálculo de potencia es una pregunta sobre el diseño: dada una diferencia que yo decido que vale la pena detectar, ¿cuántos participantes necesito? Esa diferencia se escoge por criterios clínicos, no se observa.</p>
+
+<p>Calcular la potencia después, usando el efecto que resultó, cambia la pregunta sin que nadie lo note: pasa a ser «¿qué tan probable era observar lo que ya observé?». Eso no informa sobre el diseño. Es el valor p, formulado al revés.</p>
+
+<p>Cómo se hace el cálculo cuando sí sirve, con el código en R para medias, proporciones y supervivencia, está en <a href="/articulos/tamano-de-muestra-como-se-calcula">cómo se calcula el tamaño de muestra</a>.</p>
+
+<h2>Qué reportar en su lugar</h2>
+
+<p>El intervalo de confianza, comparado explícitamente con la diferencia mínima que a usted le importaría.</p>
+
+<p>Tome un resultado no significativo: diferencia de 2,1 puntos, IC 95 % de −0,8 a 5,0, p = 0,16. Si la diferencia mínima clínicamente relevante es de 3 puntos, el intervalo todavía la contiene. La conclusión correcta no es «no hubo efecto», sino <strong>«este estudio no permite descartar un efecto relevante»</strong>. Es inconcluyente, no negativo.</p>
+
+<p>Ahora suponga el mismo p = 0,16 pero con un intervalo de −0,4 a 2,4. Ese intervalo excluye los 3 puntos. El estudio sí fue informativo y el resultado sí es negativo.</p>
+
+<p>Mismo valor p, dos conclusiones opuestas. Esa distinción es la que la potencia post hoc borra y el intervalo conserva.</p>
+
+<h2>La frase que va en el manuscrito</h2>
+
+<p>Donde iba a escribir la potencia observada, escriba algo así:</p>
+
+<div class="callout"><p>El intervalo de confianza del 95 % para la diferencia entre grupos fue de −0,8 a 5,0 puntos. Dado que la diferencia mínima clínicamente relevante definida a priori fue de 3 puntos, estos datos no permiten descartar un efecto de magnitud clínicamente importante.</p></div>
+
+<p>Es una frase, no un cálculo, y es lo que un revisor con criterio quiere leer.</p>
+
+<h2>Si se la exigen igual</h2>
+
+<p>Pasa. Algunos revisores todavía la piden. Dos salidas: incluirla señalando en una nota que el poder observado es una transformación del valor p y no aporta información independiente, o responder en la carta al editor con el intervalo de confianza y la diferencia mínima relevante. La segunda es la más defendible.</p>
+    </div>
+
+    <!-- CIERRE: conecta el tema con el servicio -->
+    <aside class="callout article-closing" aria-label="Servicio relacionado">
+      <h2>¿Tiene un resultado no significativo y no sabe cómo interpretarlo?</h2>
+      <p>En hCorpus hacemos bioestadística y epidemiología clínica para grupos de investigación, hospitales y laboratorios en Colombia. La revisión inicial no tiene costo.</p>
+      <p><a href="/servicios/bioestadistica-epidemiologia">Conozca el servicio de bioestadística y epidemiología</a></p>
+    </aside>
+
+    <section class="article-related" aria-labelledby="relacionados">
+      <h2 id="relacionados">Artículos relacionados</h2>
+      <div class="services-grid">
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/tamano-de-muestra-como-se-calcula">Cómo se calcula el tamaño de muestra</a></h3>
+          <p>Los cuatro ingredientes del cálculo, el código en R para los tres casos más frecuentes, cómo ajustar por pérdidas y qué le va a preguntar el comité.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/punto-de-corte-variable-continua">Por qué no debe partir en dos una variable continua</a></h3>
+          <p>Dicotomizar una variable continua cambia el OR según dónde se corte, pierde potencia y sesga el resultado si el corte se elige mirando los datos.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+        <article class="service-card" data-reveal>
+          <h3><a href="/articulos/sesgo-de-tiempo-inmortal">Sesgo de tiempo inmortal: cuando un fármaco inútil parece salvar vidas</a></h3>
+          <p>Por qué un fármaco sin efecto parece reducir la mortalidad un 42 % en una base de datos, cómo detectarlo y corregirlo con exposición dependiente del tiempo.</p>
+          <span class="service-link" aria-hidden="true">Leer artículo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </article>
+      </div>
+    </section>
+  </div>
+
+</article>
+</main>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="../assets/img/logo-horizontal_para-fondo-oscuro.png" alt="hCorpus">
+        <p>Bioestadística, epidemiología, bioinformática y diseño de estudios para grupos de investigación, hospitales, laboratorios de genética y empresas.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/hcorpus" target="_blank" rel="noopener" aria-label="hCorpus en LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M11.5 10H12v6"/></svg>
+          </a>
+          <a href="mailto:gerencia@h-corpus.com" aria-label="Enviar correo a hCorpus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+          <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+          <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+          <li><a href="/servicios/farmacoeconomia">Farmacoeconomía</a></li>
+          <li><a href="/servicios/analisis-omicos">Análisis ómicos</a></li>
+          <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="/#nosotros">Nosotros</a></li>
+          <li><a href="/metodologia">Metodología</a></li>
+          <li><a href="/articulos/">Artículos</a></li>
+          <li><a href="/#sectores">Sectores</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/politica-datos">Política de tratamiento de datos</a></li>
+          <li><a href="/terminos-uso">Términos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> hCorpus S.A.S. · NIT 902.098.516-1 · Bogotá D.C., Colombia</p>
+      <div class="footer-legal">
+        <a href="/politica-datos">Política de tratamiento de datos</a>
+        <a href="/terminos-uso">Términos de uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/highlight-r.js"></script>
+</body>
+</html>

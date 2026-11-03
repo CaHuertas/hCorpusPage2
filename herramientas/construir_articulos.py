@@ -183,6 +183,14 @@ class Conversor:
                     j += 1
                 out.append(("figure", "\n".join(lineas[i:j + 1])))
                 i = j + 1; continue
+            if l.startswith("> "):
+                cerrar_parrafo()
+                j = i
+                while j < len(lineas) and lineas[j].startswith(">"):
+                    j += 1
+                cita = " ".join(x.lstrip("> ").strip() for x in lineas[i:j])
+                out.append(("quote", f'<div class="callout"><p>{self.en_linea(cita)}</p></div>'))
+                i = j; continue
             m = re.match(r"^(#{2,3}) (.+)$", l)
             if m:
                 cerrar_parrafo()
@@ -300,7 +308,7 @@ def construir_articulo(a, todos, conv, cab, pie):
         bloques[0] = ("p", bloques[0][1].replace("<p>", '<p class="lead-answer">', 1))
 
     fig = figura(a)
-    if fig and not any(t == "figure" for t, _ in bloques):
+    if fig and not any(t == "figure" and a["imagen"] in x for t, x in bloques):
         destino = a.get("figura_despues_de")
         if destino:
             idx = next(k for k, (t, x) in enumerate(bloques) if t in ("h2", "h3") and destino in x)

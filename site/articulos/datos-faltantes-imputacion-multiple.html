@@ -29,7 +29,7 @@
       "headline": "Datos faltantes: qué pasa cuando borra las filas incompletas",
       "description": "Por qué borrar las filas incompletas puede sesgar sus resultados, cuándo sí es válido, y cómo hacer imputación múltiple en R con mice, paso a paso.",
       "datePublished": "2026-09-22",
-      "dateModified": "2026-09-22",
+      "dateModified": "2026-11-03",
       "inLanguage": "es-CO",
       "mainEntityOfPage": "https://h-corpus.com/articulos/datos-faltantes-imputacion-multiple",
       "image": "https://h-corpus.com/assets/img/articulos/datos-faltantes.png",
@@ -189,7 +189,7 @@
       <h1>Datos faltantes: qué pasa cuando borra las filas incompletas</h1>
       <p class="article-meta">
         <span>Publicado el <time datetime="2026-09-22">22 de septiembre de 2026</time></span>
-        <span>5 min de lectura</span>
+        <span>6 min de lectura</span>
       </p>
     </div>
   </header>
@@ -269,13 +269,51 @@ summary(pool(fit), conf.int = TRUE)</code></pre></div>
 
 <p><code>method = "pmm"</code> es <em>predictive mean matching</em>: en vez de inventar un número, toma el de un paciente real con predicción parecida. Eso mantiene los valores dentro de rangos plausibles y respeta distribuciones raras.</p>
 
-<h3>Tres decisiones que casi nadie documenta</h3>
-
-<p><strong>Cuántas imputaciones.</strong> La regla vieja decía 5. Hoy la recomendación es usar al menos tantas como el porcentaje de casos incompletos: si el 30 % de las filas tiene algún faltante, use 30. Imputar de más cuesta segundos de cómputo; imputar de menos cuesta estabilidad en el resultado.</p>
+<h3>Dos decisiones que casi nadie documenta</h3>
 
 <p><strong>Qué variables entran al modelo de imputación.</strong> Más de las que entran al análisis. Una variable que no es de interés pero que predice bien lo que falta —un laboratorio auxiliar, una escala relacionada— hace más creíble el supuesto MAR. Dejarla por fuera es desaprovechar información que ya tiene.</p>
 
 <p><strong>El desenlace entra.</strong> Suena contraintuitivo, pero excluirlo sesga las imputaciones hacia la hipótesis nula.</p>
+
+<h2>Cuántas imputaciones: la respuesta verificable</h2>
+
+<p>La regla vieja decía cinco, y viene de cuando imputar era caro en cómputo. Hoy no lo es, y cinco se queda corto con frecuencia.</p>
+
+<p>Para verlo, tomamos una base simulada con 66 % de faltantes en una variable y corrimos el mismo análisis quince veces. Mismo código, misma base, mismo método. Lo único que cambió fue la semilla.</p>
+
+<p><strong>Con m = 5</strong>, la estimación osciló entre 0,85 y 1,14: una amplitud de 0,30, cerca de un tercio del valor estimado. El valor p fue de 0,006 en una corrida y de 0,155 en otra. Dos de las quince semillas habrían concluido que no hay efecto.</p>
+
+<p><strong>Con m = 50</strong>, la estimación se quedó entre 0,99 y 1,05, y las quince semillas coincidieron.</p>
+
+<p>La diferencia entre publicar un hallazgo y publicar un resultado nulo estuvo en qué número se escribió dentro de <code>set.seed()</code>.</p>
+
+<figure>
+<img src="/assets/img/articulos/imputaciones.webp" alt="Puntos de la misma estimación con quince semillas para m = 5, 10, 20 y 50: la amplitud baja de 0,30 a 0,07, y con m = 5 dos de las quince corridas no alcanzan p = 0,05" width="1479" height="1653" loading="lazy" decoding="async">
+</figure>
+
+<h3>El atajo y la verificación</h3>
+
+<p>Como atajo, la regla más usada funciona bien: <strong>m al menos igual al porcentaje de casos incompletos</strong>. Si el 40 % de las filas tiene algún faltante, use 40.</p>
+
+<p>Pero el atajo no reemplaza la verificación, que toma minutos:</p>
+
+<div class="code-block"><pre tabindex="0"><code class="language-r">estable &lt;- function(m, semillas = 1:15) {
+  sapply(semillas, function(s) {
+    imp &lt;- mice(datos, m = m, seed = s, printFlag = FALSE)
+    summary(pool(with(imp, lm(y ~ grupo + gravedad + edad))))[2, "estimate"]
+  })
+}
+
+diff(range(estable(5)))
+diff(range(estable(50)))</code></pre></div>
+
+<p>Suba m hasta que esa amplitud sea despreciable frente al tamaño del efecto que le interesa.</p>
+
+<h3>Y declare la semilla</h3>
+
+<p>La semilla va en el script y en el artículo. No porque fije la verdad, sino porque sin ella nadie puede reproducir su número. Un análisis con imputación y sin semilla declarada no es reproducible, por bien hecho que esté.</p>
+
+<p>Subir m estabiliza la estimación. No arregla un supuesto MAR que no se cumple, ni recupera información que no existe: con 66 % de faltantes el intervalo va a ser ancho por más imputaciones que haga, y así debe ser.</p>
 
 <h2>Qué se escribe en el artículo</h2>
 
@@ -315,8 +353,8 @@ summary(pool(fit), conf.int = TRUE)</code></pre></div>
           </span>
         </article>
         <article class="service-card" data-reveal>
-          <h3><a href="/articulos/punto-de-corte-variable-continua">Por qué no debe partir en dos una variable continua</a></h3>
-          <p>Dicotomizar una variable continua cambia el OR según dónde se corte, pierde potencia y sesga el resultado si el corte se elige mirando los datos.</p>
+          <h3><a href="/articulos/sesgo-de-tiempo-inmortal">Sesgo de tiempo inmortal: cuando un fármaco inútil parece salvar vidas</a></h3>
+          <p>Por qué un fármaco sin efecto parece reducir la mortalidad un 42 % en una base de datos, cómo detectarlo y corregirlo con exposición dependiente del tiempo.</p>
           <span class="service-link" aria-hidden="true">Leer artículo
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>

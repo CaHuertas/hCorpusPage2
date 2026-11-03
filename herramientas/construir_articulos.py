@@ -419,7 +419,7 @@ def construir_indice(arts, cab, pie):
       </nav>
       <p class="eyebrow">Artículos</p>
       <h1>Bioestadística y análisis de datos, en la práctica</h1>
-      <p class="lede">Las preguntas que más nos hacen los grupos de investigación, respondidas con ejemplos y con el código en R para hacerlo usted mismo.</p>
+      <p class="lede">Las preguntas que más se hacen los grupos de investigación, respondidas con ejemplos y con el código en R para hacerlo usted mismo.</p>
     </div>
   </section>
 

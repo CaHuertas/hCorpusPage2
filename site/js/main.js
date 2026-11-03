@@ -158,12 +158,13 @@
       formStatus.className = "form-status is-visible " + kind;
     }
 
-    function openMailto(nombre, correo, organizacion, mensaje) {
+    function openMailto(nombre, correo, organizacion, mensaje, origen) {
       var subject = encodeURIComponent("Contacto desde h-corpus.com — " + nombre);
       var body = encodeURIComponent([
         "Nombre: " + nombre,
         "Correo: " + correo,
         "Organización: " + (organizacion || "—"),
+        "Origen: " + origen,
         "",
         mensaje
       ].join("\n"));
@@ -178,6 +179,7 @@
       var organizacion = form.organizacion.value.trim();
       var mensaje = form.mensaje.value.trim();
       var autorizacion = form.autorizacion.checked;
+      var origen = form.origen.value;
 
       if (!nombre || !correo || !mensaje) {
         setStatus("Por favor complete los campos obligatorios.", "err");
@@ -195,7 +197,7 @@
       }
 
       if (!hasKey) {
-        openMailto(nombre, correo, organizacion, mensaje);
+        openMailto(nombre, correo, organizacion, mensaje, origen);
         setStatus("Se abrió su cliente de correo con el mensaje listo para enviar.", "ok");
         return;
       }
@@ -215,6 +217,7 @@
           nombre: nombre,
           correo: correo,
           organizacion: organizacion || "—",
+          origen: origen,
           mensaje: mensaje,
           autorizacion_datos: "Sí, conforme a la Política de Tratamiento de Datos Personales"
         })

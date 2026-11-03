@@ -2,3 +2,7 @@
 /servicios/genomica-transcriptomica /servicios/analisis-omicos 301
 /servicios/genomica-transcriptomica.html /servicios/analisis-omicos 301
 /servicios/genomica-transcriptomica/ /servicios/analisis-omicos 301
+/index.html / 301
+/servicios/index.html /servicios/ 301
+/articulos/index.html /articulos/ 301
+/*.html /:splat 301

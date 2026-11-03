@@ -1,0 +1,4 @@
+# Cloudflare: la URL vieja ya está indexada; no necesita archivo propio para redirigir.
+/servicios/genomica-transcriptomica /servicios/analisis-omicos 301
+/servicios/genomica-transcriptomica.html /servicios/analisis-omicos 301
+/servicios/genomica-transcriptomica/ /servicios/analisis-omicos 301

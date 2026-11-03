@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farmacoeconomía y evidencia del mundo real | hCorpus</title>
+<meta name="description" content="Evaluaciones económicas, análisis de impacto presupuestal y estudios de mundo real con fuentes colombianas: SISPRO, RIPS, estadísticas vitales y Cuenta de Alto Costo.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon_32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon/favicon_64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon_180.png">
+
+<meta property="og:title" content="Farmacoeconomía y evidencia del mundo real | hCorpus">
+<meta property="og:description" content="Evaluaciones económicas, análisis de impacto presupuestal y estudios de mundo real con fuentes colombianas: SISPRO, RIPS, estadísticas vitales y Cuenta de Alto Costo.">
+<meta property="og:image" content="https://h-corpus.com/assets/img/og-image.png">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://h-corpus.com/servicios/farmacoeconomia">
+<link rel="stylesheet" href="../css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Farmacoeconomía y evidencia del mundo real",
+      "serviceType": "Farmacoeconomía y evidencia del mundo real",
+      "description": "Evaluaciones económicas, análisis de impacto presupuestal y estudios de mundo real con fuentes colombianas: SISPRO, RIPS, estadísticas vitales y Cuenta de Alto Costo.",
+      "url": "https://h-corpus.com/servicios/farmacoeconomia",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Colombia"
+      },
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://h-corpus.com/#organization",
+        "name": "hCorpus",
+        "url": "https://h-corpus.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://h-corpus.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://h-corpus.com/servicios/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Farmacoeconomía",
+          "item": "https://h-corpus.com/servicios/farmacoeconomia"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="hCorpus — inicio">
+      <img src="../assets/img/logo-horizontal_transparente.png" alt="hCorpus">
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li class="has-dropdown">
+          <button type="button" class="nav-dropdown-toggle is-current" aria-expanded="false" aria-haspopup="true" aria-controls="servicesMenu">
+            Servicios
+            <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" id="servicesMenu">
+            <a href="/servicios/asesoria-metodologica">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Asesoría metodológica</strong><small>Protocolo, SAP y tamaño de muestra</small></span>
+            </a>
+            <a href="/servicios/bioestadistica-epidemiologia">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Bioestadística y epidemiología</strong><small>Regresión, supervivencia, inferencia causal</small></span>
+            </a>
+            <a href="/servicios/curaduria-datos">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Curaduría y análisis de datos</strong><small>Limpieza, EDA y reproducibilidad</small></span>
+            </a>
+            <a href="/servicios/farmacoeconomia" aria-current="page">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Farmacoeconomía</strong><small>Costo-efectividad e impacto presupuestal</small></span>
+            </a>
+            <a href="/servicios/analisis-omicos">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/><path d="M9.5 6.5h5M8.7 9.5h6.6M8.7 14.5h6.6M9.5 17.5h5"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Análisis ómicos</strong><small>RNA-seq, farmacogenómica, proteómica</small></span>
+            </a>
+            <a href="/servicios/formacion-aplicada">
+              <span class="nav-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 5-10 5L2 8l10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 8v6"/></svg></span>
+              <span class="nav-dropdown-text"><strong>Formación aplicada</strong><small>Cursos de R, Python y bioinformática</small></span>
+            </a>
+            <a class="nav-dropdown-all" href="/servicios/">
+              Ver todos los servicios
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </li>
+        <li><a href="/metodologia">Metodología</a></li>
+        <li><a href="/articulos/">Artículos</a></li>
+        <li><a href="/#nosotros">Nosotros</a></li>
+        <li><a href="/#sectores">Sectores</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="#contacto">Revisión inicial gratis</a>
+      <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Abrir menú de navegación">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+  <ul>
+    <li class="mobile-has-children">
+      <div class="mobile-nav-row">
+        <a href="/servicios/">Servicios</a>
+        <button type="button" class="mobile-subnav-toggle" aria-expanded="false" aria-controls="mobileServicesSub" aria-label="Mostrar servicios">
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <ul class="mobile-subnav" id="mobileServicesSub">
+        <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+        <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+        <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+        <li><a href="/servicios/farmacoeconomia">Farmacoeconomía</a></li>
+        <li><a href="/servicios/analisis-omicos">Análisis ómicos</a></li>
+        <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+      </ul>
+    </li>
+    <li><a href="/metodologia">Metodología</a></li>
+    <li><a href="/articulos/">Artículos</a></li>
+    <li><a href="/#nosotros">Nosotros</a></li>
+    <li><a href="/#sectores">Sectores</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn btn-primary btn-block" href="#contacto">Revisión inicial gratis</a>
+</nav>
+
+<main id="contenido">
+
+  <!-- HERO -->
+  <section class="hero-dark">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/servicios/">Servicios</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">Farmacoeconomía</span>
+      </p>
+      <p class="eyebrow">Servicios · Farmacoeconomía</p>
+      <h1>Farmacoeconomía y evidencia del mundo real</h1>
+      <p class="lede">Cuánto cuesta una tecnología en salud, a quién llega hoy, y qué pasaría si llegara a más gente. Trabajamos con las fuentes nacionales y con los lineamientos que usan las agencias colombianas, documentando de dónde salió cada cifra.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contacto">Revisión inicial gratis</a>
+        <a class="btn btn-ghost-light" href="/servicios/">Ver todos los servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ HACEMOS -->
+  <section class="services">
+    <div class="container">
+      <div class="detail-block">
+        <h2>Qué hacemos</h2>
+        <h3 style="margin-top: var(--space-lg);">Evaluaciones económicas completas</h3>
+        <p>Costo-efectividad, costo-utilidad y costo-minimización, con modelos de Markov, árboles de decisión o microsimulación según lo que pida la pregunta. Análisis de sensibilidad determinístico y probabilístico, con curvas de aceptabilidad.</p>
+        <h3 style="margin-top: var(--space-lg);">Análisis de impacto presupuestal</h3>
+        <p>Qué le cuesta al sistema, o a un pagador en particular, incorporar una tecnología, con los escenarios de penetración y los horizontes que exige el caso de referencia colombiano.</p>
+        <h3 style="margin-top: var(--space-lg);">Carga de enfermedad</h3>
+        <p>Cuántos casos hay, dónde están, cómo se distribuyen por territorio y por régimen, y cuánto se está gastando hoy en atenderlos.</p>
+        <h3 style="margin-top: var(--space-lg);">Estudios de evidencia del mundo real</h3>
+        <p>Patrones de uso, adherencia, persistencia al tratamiento, trayectorias de atención y desenlaces, a partir de los registros administrativos del sistema de salud colombiano.</p>
+        <h3 style="margin-top: var(--space-lg);">Identificación de brechas de acceso</h3>
+        <p>Dónde hay casos y no hay tratamiento, y qué caracteriza a esos territorios. Es la pregunta que más consecuencias prácticas tiene, y la que casi nadie responde con datos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUENTES Y PROCEDENCIA -->
+  <section class="services section-alt">
+    <div class="container">
+      <div class="detail-block">
+        <h2>Con qué fuentes</h2>
+        <p>Trabajamos con las bases del sistema de salud colombiano:</p>
+        <ul class="check-list">
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>SISPRO</strong>, cubos y bodega de datos del Ministerio de Salud</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>RIPS</strong>, registros individuales de prestación de servicios</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>Estadísticas vitales</strong> (EEVV) y <strong>RUAF</strong> para mortalidad</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>Sivigila</strong> para eventos de notificación obligatoria</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>Cuenta de Alto Costo</strong> para las patologías priorizadas</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>SISMED</strong> para precios de medicamentos</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text">Datos propios del cliente, cuando existen y se pueden compartir</span>
+          </li>
+        </ul>
+        <p style="margin-top: var(--space-lg);">Cuando una pregunta requiere información que no está publicada, la solicitamos por los canales formales: derecho de petición o la vía que corresponda. Ese trámite forma parte del proyecto y su radicado queda en el informe.</p>
+      </div>
+
+      <div class="detail-block">
+        <h2>Cómo documentamos la procedencia</h2>
+        <p>Todo informe nuestro lleva un <strong>anexo de procedencia</strong>: para cada cifra, de qué fuente salió, con qué fecha de corte, qué consulta exacta se hizo y, si aplica, el número de radicado de la solicitud. Esto no es trámite: es lo que permite que un revisor, un comité o un área de cumplimiento verifique el resultado sin tener que confiar en nosotros.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTÁNDARES -->
+  <section class="services">
+    <div class="container">
+      <div class="detail-block">
+        <h2>Estándares que seguimos</h2>
+        <ul class="check-list">
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>IETS.</strong> <em>Manual para la elaboración de evaluaciones económicas en salud</em> y <em>Manual para la elaboración de análisis de impacto presupuestal</em>, con el caso de referencia nacional.</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>CHEERS 2022</strong> para el reporte de evaluaciones económicas.</span>
+          </li>
+          <li>
+            <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5 11-11"/></svg></span>
+            <span class="check-text"><strong>RECORD</strong> y <strong>STROBE</strong> para estudios con datos de registros administrativos.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ NO HACEMOS -->
+  <div class="container cta-wrap" style="padding-top: 0;">
+    <div class="cta-banner" data-reveal>
+      <h2>Qué no hacemos</h2>
+      <p>No hacemos promoción ni apoyo a estrategias comerciales. No redactamos materiales dirigidos a prescriptores. No ajustamos supuestos para que un resultado salga en una dirección determinada.</p>
+      <p style="margin-bottom: 0;">Entregamos el análisis con el método declarado, los supuestos visibles y los escenarios en los que la conclusión cambia. Si el resultado no favorece a quien paga, el informe lo dice igual. Esa es, precisamente, la razón para contratar a un tercero.</p>
+    </div>
+  </div>
+
+  <!-- EQUIPO -->
+  <section class="services" style="padding-top: 0;">
+    <div class="container">
+      <div class="detail-block">
+        <h2>Equipo</h2>
+        <p>Esta línea combina bioestadística y epidemiología con evaluación económica. Los proyectos de farmacoeconomía los desarrollamos junto con un economista con experiencia en el sector salud.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS RELACIONADOS -->
+  <section class="services section-alt">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">También le puede interesar</p>
+        <h2>Servicios relacionados</h2>
+      </div>
+      <div class="services-grid">
+        <article class="service-card" data-reveal>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg>
+          </div>
+          <h3><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología clínica</a></h3>
+          <p>Regresión, supervivencia, análisis de registros institucionales, modelos avanzados e inferencia causal.</p>
+          <a class="service-link" href="/servicios/bioestadistica-epidemiologia">Saber más
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+        <article class="service-card" data-reveal>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+          </div>
+          <h3><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></h3>
+          <p>Limpieza y documentación de la base antes de modelar.</p>
+          <a class="service-link" href="/servicios/curaduria-datos">Saber más
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+        <article class="service-card" data-reveal>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3><a href="/servicios/asesoria-metodologica">Asesoría metodológica y diseño de estudios</a></h3>
+          <p>Si el estudio todavía no existe, lo diseñamos con usted desde el protocolo.</p>
+          <a class="service-link" href="/servicios/asesoria-metodologica">Saber más
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="container contact-grid">
+      <div class="contact-info" data-reveal>
+        <p class="eyebrow">Contacto</p>
+        <h2>Iniciemos una conversación</h2>
+        <p>Cuéntenos sobre su base o su protocolo. Primero revisamos su caso y después cotizamos; la primera revisión no tiene costo, y respondemos en un plazo de 1 a 2 días hábiles.</p>
+
+        <div class="contact-channels">
+          <a class="contact-channel" href="mailto:gerencia@h-corpus.com">
+            <span class="ch-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            </span>
+            <span>gerencia@h-corpus.com<br><small>Correo electrónico</small></span>
+          </a>
+          <a class="contact-channel" href="https://www.linkedin.com/company/hcorpus" target="_blank" rel="noopener">
+            <span class="ch-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M11.5 10H12v6"/></svg>
+            </span>
+            <span>hCorpus<br><small>LinkedIn</small></span>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <!-- Clave de Web3Forms (pública por diseño). -->
+        <input type="hidden" name="access_key" value="807caff6-077d-4763-9c1d-c68abd98d505">
+        <input type="hidden" name="from_name" value="Sitio web hCorpus">
+        <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="nombre">Nombre <span class="req">*</span></label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </div>
+          <div class="form-row">
+            <label for="correo">Correo <span class="req">*</span></label>
+            <input type="email" id="correo" name="correo" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="organizacion">Organización</label>
+          <input type="text" id="organizacion" name="organizacion" autocomplete="organization">
+        </div>
+        <div class="form-row">
+          <label for="mensaje">Cuéntenos sobre su proyecto <span class="req">*</span></label>
+          <textarea id="mensaje" name="mensaje" required></textarea>
+          <p class="field-hint">Incluya tipo de datos, objetivo del análisis y plazos si los tiene.</p>
+        </div>
+        <div class="form-row form-row-check">
+          <label class="checkbox-label">
+            <input type="checkbox" id="autorizacion" name="autorizacion" required>
+            <span>Autorizo a HCORPUS S.A.S. el tratamiento de mis datos personales conforme a su <a href="/politica-datos" target="_blank" rel="noopener">Política de Tratamiento de Datos Personales</a>, que declaro haber consultado. <span class="req">*</span></span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Enviar mensaje</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        <p class="form-note">Su mensaje llega directamente a gerencia@h-corpus.com. Respondemos en 1 a 2 días hábiles.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="../assets/img/logo-horizontal_para-fondo-oscuro.png" alt="hCorpus">
+        <p>Bioestadística, epidemiología, bioinformática y diseño de estudios para grupos de investigación, hospitales, laboratorios de genética y empresas.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/hcorpus" target="_blank" rel="noopener" aria-label="hCorpus en LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.01M12 16v-3.5a2 2 0 0 1 4 0V16M11.5 10H12v6"/></svg>
+          </a>
+          <a href="mailto:gerencia@h-corpus.com" aria-label="Enviar correo a hCorpus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="/servicios/asesoria-metodologica">Asesoría metodológica</a></li>
+          <li><a href="/servicios/bioestadistica-epidemiologia">Bioestadística y epidemiología</a></li>
+          <li><a href="/servicios/curaduria-datos">Curaduría y análisis de datos</a></li>
+          <li><a href="/servicios/farmacoeconomia">Farmacoeconomía</a></li>
+          <li><a href="/servicios/analisis-omicos">Análisis ómicos</a></li>
+          <li><a href="/servicios/formacion-aplicada">Formación aplicada</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="/#nosotros">Nosotros</a></li>
+          <li><a href="/metodologia">Metodología</a></li>
+          <li><a href="/articulos/">Artículos</a></li>
+          <li><a href="/#sectores">Sectores</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/politica-datos">Política de tratamiento de datos</a></li>
+          <li><a href="/terminos-uso">Términos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> hCorpus S.A.S. · NIT 902.098.516-1 · Bogotá D.C., Colombia</p>
+      <div class="footer-legal">
+        <a href="/politica-datos">Política de tratamiento de datos</a>
+        <a href="/terminos-uso">Términos de uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

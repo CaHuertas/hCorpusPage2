@@ -46,7 +46,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://h-corpus.com/servicios/genomica-transcriptomica</loc>
+    <loc>https://h-corpus.com/servicios/farmacoeconomia</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://h-corpus.com/servicios/analisis-omicos</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

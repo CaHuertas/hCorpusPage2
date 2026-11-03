@@ -1,4 +1,22 @@
 /* ============================================================
+   Tipografías autoalojadas (fuentes variables, subconjunto latin; licencia OFL)
+   ============================================================ */
+@font-face{
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url('../assets/fonts/lexend-latin.woff2') format('woff2');
+}
+@font-face{
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/source-sans-3-latin.woff2') format('woff2');
+}
+
+/* ============================================================
    hCorpus — Design tokens
    Paleta extraída del generador de marca (hCorpus_logo_modular_COMPLETO.ipynb)
    ============================================================ */
@@ -662,6 +680,7 @@ section{ position: relative; }
 .hero-visual .brand-logo{
   position: relative;
   width: min(560px, 92vw);
+  height: auto;
   filter: drop-shadow(0 24px 40px rgba(18,43,91,0.16));
 }
 .hero-visual .node-dot{
@@ -919,7 +938,7 @@ section{ position: relative; }
   grid-template-columns: repeat(2, 1fr);
 }
 @media (min-width: 800px){
-  .sectors-grid{ grid-template-columns: repeat(4, 1fr); }
+  .sectors-grid{ grid-template-columns: repeat(3, 1fr); }
 }
 .sector-card{
   background: var(--surface);

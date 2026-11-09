@@ -122,31 +122,6 @@
     });
   });
 
-  // Reveal on scroll
-  var revealItems = document.querySelectorAll("[data-reveal]");
-  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (revealItems.length && !prefersReducedMotion && "IntersectionObserver" in window) {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
-    );
-    revealItems.forEach(function (item) {
-      observer.observe(item);
-    });
-  } else {
-    revealItems.forEach(function (item) {
-      item.classList.add("is-visible");
-    });
-  }
-
   // Formulario de contacto -> Web3Forms (mailto: como respaldo mientras no haya clave)
   if (form) {
     var submitBtn = form.querySelector("button[type=submit]");

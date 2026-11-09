@@ -279,7 +279,7 @@ def tarjeta(a, con_meta=True):
             <span class="service-tags"><span>{a['etiqueta']}</span></span>
             <time datetime="{a['fecha']}">{fecha_larga(a['fecha'])}</time>
           </p>""" if con_meta else "")
-    return f"""        <article class="service-card" data-reveal>{meta}
+    return f"""        <article class="service-card">{meta}
           <h3><a href="/articulos/{a['slug']}">{html.escape(a['title'])}</a></h3>
           <p>{html.escape(a['resumen'])}</p>
           <span class="service-link" aria-hidden="true">Leer artículo
@@ -442,7 +442,7 @@ def construir_indice(arts, cab, pie):
 
   <!-- CTA -->
   <div class="container cta-wrap">
-    <div class="cta-banner" data-reveal>
+    <div class="cta-banner">
       <h2>¿Prefiere que lo hagamos nosotros?</h2>
       <p>Miramos su base o su protocolo durante una hora y le contamos por escrito qué encontramos. De ahí sale la cotización.</p>
       <a class="btn btn-on-dark" href="/#contacto">Escríbanos ahora</a>

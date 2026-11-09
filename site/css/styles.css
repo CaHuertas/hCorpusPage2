@@ -1085,20 +1085,6 @@ input:focus, textarea:focus{
 .footer-bottom a:hover{ color: #fff; }
 .footer-legal{ display: flex; gap: var(--space-md); flex-wrap: wrap; }
 
-/* Utilidad de reveal-on-scroll */
-[data-reveal]{
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 600ms ease, transform 600ms ease;
-}
-[data-reveal].is-visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce){
-  [data-reveal]{ opacity: 1; transform: none; }
-}
-
 /* ============================================================
    Páginas de servicio — utilidades reutilizables
    ============================================================ */

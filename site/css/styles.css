@@ -666,65 +666,6 @@ section{ position: relative; }
 }
 
 /* ============================================================
-   Quién está detrás
-   ============================================================ */
-.founder{ padding-block: var(--space-xl) var(--space-3xl); }
-.founder-grid{
-  display: grid;
-  gap: var(--space-xl);
-  align-items: start;
-}
-.founder-photo{
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  margin-inline: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-.founder-photo img{ width: 100%; height: auto; }
-.founder-copy h2{
-  font-size: clamp(1.7rem, 1.2rem + 2vw, 2.5rem);
-  margin-bottom: var(--space-sm);
-}
-.founder-name{ font-size: 1.125rem; margin-bottom: 0; }
-.founder-role{
-  color: var(--teal-text);
-  font-weight: 500;
-  margin-bottom: var(--space-md);
-}
-.founder-copy > p:not(.founder-role){ margin-bottom: var(--space-sm); }
-.founder-creds{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-sm);
-  margin-top: var(--space-xl);
-}
-.founder-cred-value{
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: var(--navy-dark);
-  margin-bottom: var(--space-2xs);
-}
-.founder-cred-label{ font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
-.founder-links{
-  margin-top: var(--space-md);
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  text-align: center;
-}
-.founder-links a{ color: var(--teal-text); font-weight: 600; }
-@media (min-width: 800px){
-  .founder-grid{ grid-template-columns: 320px minmax(0, 1fr); gap: var(--space-2xl); }
-  .founder-photo{ margin-inline: 0; }
-}
-@media (min-width: 1000px){
-  .founder-creds{ grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-md); }
-}
-
-/* ============================================================
    Servicios
    ============================================================ */
 .services{ padding-block: var(--space-3xl); }
@@ -1666,4 +1607,92 @@ input:focus, textarea:focus{
   .detail-block .service-table tbody tr + tr{ margin-top: var(--space-sm); }
   .detail-block .service-table tbody td{ padding: 0; border: none; white-space: normal; }
   .detail-block .service-table tbody td + td{ margin-top: var(--space-2xs); }
+}
+
+/* ============================================================
+   Fundador, dentro de «Quiénes somos»
+   ============================================================ */
+.values .section-head{ margin-bottom: 0; }
+.founder{
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+.founder-id{
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.founder-photo{
+  flex: 0 0 auto;
+  display: block;
+  width: 76px;
+  height: 76px;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+}
+.founder-photo img{
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  object-fit: cover;
+}
+.founder-label{
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-text);
+  margin-bottom: 2px;
+}
+.founder-name{ font-size: 1.0625rem; line-height: 1.3; }
+.founder-role{ font-size: 0.9rem; color: var(--text-muted); }
+.founder-links{ margin-top: 2px; font-size: 0.875rem; color: var(--text-muted); }
+.founder-links a{ color: var(--teal-text); font-weight: 600; }
+.founder-body > p{
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+}
+.founder-body > p + p{ margin-top: var(--space-sm); }
+.founder-creds{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-block: var(--space-lg);
+}
+.founder-creds li{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: var(--space-sm);
+  border-left: 2px solid var(--teal);
+}
+.founder-creds strong{
+  font-family: var(--font-heading);
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+.founder-creds span{ font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); }
+@media (min-width: 700px){
+  .founder-creds{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px){
+  .founder{
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+    column-gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-2xl);
+  }
+  .founder-id{
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+  .founder-photo{ width: 92px; height: 92px; }
 }

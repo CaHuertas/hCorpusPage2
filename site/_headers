@@ -12,11 +12,11 @@
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
-# CSS y JS: caché corta (no usamos hashes de versión en el nombre de archivo)
+# CSS y JS: siempre revalidar; sin hashes en el nombre, una caché larga mezcla HTML nuevo con estilos viejos
 /css/*
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=0, must-revalidate
 /js/*
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Imágenes y favicons: cambian poco, caché larga
 /assets/img/*

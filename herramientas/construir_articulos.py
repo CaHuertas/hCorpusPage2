@@ -265,8 +265,8 @@ def encabezado(cab, titulo, descripcion, canonica, og_tipo, og_imagen, ld, extra
     h = h.replace('<meta property="og:type" content="website">',
                   f'<meta property="og:type" content="{og_tipo}">\n<meta property="og:url" content="{canonica}">{extra_meta}')
     h = re.sub(r'<link rel="canonical" href=".*?">', f'<link rel="canonical" href="{canonica}">', h)
-    h = h.replace('<link rel="stylesheet" href="css/styles.css">',
-                  '<link rel="stylesheet" href="css/styles.css">\n\n<script type="application/ld+json">\n'
+    h = h.replace('<link rel="stylesheet" href="css/styles.css?v=20261108">',
+                  '<link rel="stylesheet" href="css/styles.css?v=20261108">\n\n<script type="application/ld+json">\n'
                   + json.dumps(ld, ensure_ascii=False, indent=2) + "\n</script>")
     h = h.replace(' aria-current="page"', "")
     h = h.replace('<a href="/articulos/">Artículos</a>', '<a href="/articulos/" aria-current="page">Artículos</a>', 2)

@@ -1706,6 +1706,7 @@ input:focus, textarea:focus{
 
 /* Historia */
 .founder-story > p{ font-size: 1.0625rem; }
+.founder-story > p + p{ margin-top: var(--space-sm); }
 .founder-story > .founder-lead{
   font-family: var(--font-heading);
   font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
@@ -1737,20 +1738,6 @@ input:focus, textarea:focus{
   color: var(--cyan);
 }
 .founder-evidence span{ font-size: 0.9rem; line-height: 1.4; }
-.founder-sources{
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs);
-  margin-top: var(--space-sm);
-}
-.founder-sources li{
-  padding: 5px 14px;
-  border-radius: var(--radius-full);
-  background: rgba(20,175,190,0.16);
-  color: #DFF6F8;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
 .founder-quote{
   margin: var(--space-lg) 0 var(--space-md);
   padding-left: var(--space-md);
@@ -1775,6 +1762,7 @@ input:focus, textarea:focus{
   border-top: 1px solid rgba(255,255,255,0.14);
 }
 .founder-creds li{ display: flex; flex-direction: column; gap: 4px; }
+.founder-creds li:last-child{ grid-column: 1 / -1; }
 .founder-creds strong{
   font-family: var(--font-heading);
   font-size: 1.025rem;
@@ -1786,7 +1774,8 @@ input:focus, textarea:focus{
 @media (min-width: 640px){
   .founder{ padding: var(--space-xl); }
   .founder-evidence{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .founder-creds{ grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-md); }
+  .founder-creds{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); }
+  .founder-creds li:last-child{ grid-column: auto; }
 }
 @media (min-width: 1024px){
   .founder{
